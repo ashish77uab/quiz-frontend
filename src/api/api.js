@@ -212,3 +212,17 @@ export const updateHolding = (data, holdingId, isChecked) => API.put(`holding/up
 export const deleteHolding = (holdingId) => API.delete(`holding/delete-holding/${holdingId}`);
 
 export const contactUsRequest = (formData) => API.post(`auth/contact-us`, formData);
+
+
+// quiz
+export const getAllQuizList = (params) => API.get(`quiz/list?page=${params?.page}&limit=${params?.limit}&search=${params?.search}`);
+export const createQuiz = (data) => API.post(`quiz/create-quiz`, data);
+export const updateQuiz = (data, quizId) => API.put(`quiz/update-quiz/${quizId}`, data);
+export const getQuizInfo = (quizId) => API.get(`quiz/single-quiz/${quizId}`);
+export const deleteQuiz = (quizId) => API.delete(`quiz/delete-quiz/${quizId}`);
+
+// question
+export const getQuizQuestionList = (quizId) => API.get(`question/list?quizId=${quizId}`);
+export const createQuestion = (data) => API.post(`question/create-question`, data);
+export const updateQuestion = (data) => API.put(`question/update-question`, data);
+

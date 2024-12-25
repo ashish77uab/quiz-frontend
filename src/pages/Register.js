@@ -19,17 +19,7 @@ const initialState = {
   dob: "",
   email: "",
   gender: "others",
-  panImage: "",
-  aadharImage: "",
-  clientImage: "",
   phone: "",
-  panNumber: "",
-  aadharNumber: "",
-  address: "",
-  bankName: "",
-  accountNumber: "",
-  ifscCode: "",
-  accountType: "saving",
   password: "",
   confirmPassword: "",
 };
@@ -93,7 +83,7 @@ const Register = ({ closeModal }) => {
               <h3 className="py-4 heading-4 text-center capitalize">
                 Create new account
               </h3>
-              <div className="px-4 lg:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4">
+              <div className="px-4 lg:px-6 grid grid-cols-1 gap-4">
                 <TextInput
                   label={"First Name"}
                   type="text"
@@ -147,110 +137,6 @@ const Register = ({ closeModal }) => {
                   />
                 </div>
                 <div>
-                  <TextInput
-                    label={"Pan Number"}
-                    type="text"
-                    placeholder="pan number"
-                    name="panNumber"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.panNumber}
-                  />
-                </div>
-                <div>
-                  <TextInput
-                    label={"PAN Image"}
-                    type="file"
-                    name="panImage"
-                    onChange={(e) => {
-                      setFieldValue('panImage', e.target.files[0])
-                    }}
-                    onBlur={handleBlur}
-
-                  />
-                </div>
-                <div>
-                  <TextInput
-                    label={"Aadhar Number"}
-                    type="text"
-                    placeholder="aadhar number"
-                    name="aadharNumber"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.aadharNumber}
-                  />
-                </div>
-                <div>
-                  <TextInput
-                    label={"Aadhar Image"}
-                    type="file"
-                    name="aadharImage"
-                    onChange={(e) => {
-                      setFieldValue('aadharImage', e.target.files[0])
-                    }}
-                    onBlur={handleBlur}
-
-                  />
-                </div>
-                <div>
-                  <TextInput
-                    label={"Client Image"}
-                    type="file"
-                    name="clientImage"
-                    onChange={(e) => {
-                      setFieldValue('clientImage', e.target.files[0])
-                    }}
-                    onBlur={handleBlur}
-
-                  />
-                </div>
-                <div>
-                  <TextInput
-                    label={"Address"}
-                    type="text"
-                    placeholder="address"
-                    name="address"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.address}
-                  />
-                </div>
-
-                <div>
-                  <TextInput
-                    label={"Bank Name"}
-                    type="text"
-                    placeholder="bank name"
-                    name="bankName"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.bankName}
-                  />
-                </div>
-                <div>
-                  <TextInput
-                    label={"Account Number"}
-                    type="text"
-                    placeholder="account number"
-                    name="accountNumber"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.accountNumber}
-                  />
-                </div>
-
-                <div>
-                  <TextInput
-                    label={"IFSC Code"}
-                    type="text"
-                    placeholder="IFSC Code"
-                    name="ifscCode"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.ifscCode}
-                  />
-                </div>
-                <div>
                   <ReactSelect
                     name='gender'
                     label={"Select Gender"}
@@ -259,19 +145,6 @@ const Register = ({ closeModal }) => {
                     onChange={(e) => {
                       setFieldValue('gender', e?.value)
                       setSelect({ ...select, gender: e })
-
-                    }}
-                  />
-                </div>
-                <div>
-                  <ReactSelect
-                    name='accountType'
-                    label={"Select Account Type"}
-                    options={accounts}
-                    value={select?.account}
-                    onChange={(e) => {
-                      setFieldValue('accountType', e?.value)
-                      setSelect({ ...select, account: e })
 
                     }}
                   />

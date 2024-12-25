@@ -20,7 +20,10 @@ import {
   Markets,
   NetPosition,
   Portfolio,
-  UserHoldings
+  UserHoldings,
+  AllQuiz,
+  AddQuizQuestion,
+  UpdateQuizQuestion
 } from "./pages";
 import { getUser } from "./api/api";
 import { useDispatch, useSelector } from "react-redux";
@@ -79,6 +82,9 @@ function App() {
           <Route path="/dashboard" element={<ProtectedRoutes><DashboardLayout /></ProtectedRoutes>}>
             <Route index element={<Dashboard />} />
             <Route path="users" element={<AllUsers />} />
+            <Route path="quiz" element={<AllQuiz />} />
+            <Route path="quiz/add-question/:quizId" element={<AddQuizQuestion />} />
+            <Route path="quiz/update-question/:quizId" element={<UpdateQuizQuestion />} />
             <Route path="transactions" element={<AllTransactions />} />
             <Route path="user/:userId" element={<UserDetails />} />
             <Route path="user-stocks/:userId" element={<UserStocks />} />

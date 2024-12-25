@@ -3,27 +3,18 @@ import { getAllUsersList } from "../../api/api";
 import { toast } from "react-toastify";
 import ToastMsg from "../../components/toast/ToastMsg";
 import { numberWithCommas } from "../../utils/helpers";
-import { reactIcons } from "../../utils/icons";
 import Pagination from "../../components/Pagination";
 import RenderNoData from "../../components/layout/RenderNoData";
-import ActionButton from "../../components/button/ActionButton";
-import SendVoucherNotification from "../../components/modals/SendVoucherNotification";
-import ViewUsersVouchers from "../../components/modals/ViewUsersVouchers";
 import TextInput from "../../components/forms/TextInput";
 import { useNavigate } from "react-router-dom";
 
 const AllUsers = () => {
   const navigate = useNavigate();
   const limit = 10
-  const [isViewVoucherOpen, setIsViewVoucherOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [deferedValue, setDeferedValue] = useState('');
-  const [isSendNotificationOpen, setIsSendNotificationOpen] = useState(false);
   const [users, setUsers] = useState(null);
-  const [vouchers, setVouchers] = useState(null);
-  const [userVoucher, setUserVoucher] = useState([]);
   const [page, setPage] = useState(1);
-  const [userId, setUserId] = useState(null)
   const [fetchLoading, setFetchLoading] = useState(false);
 
   const getAllUsers = async () => {

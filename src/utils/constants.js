@@ -493,6 +493,11 @@ export const links = [
     icon: reactIcons.users,
   },
   {
+    path: "quiz",
+    title: "Quiz List",
+    icon: reactIcons.list,
+  },
+  {
     path: "transactions",
     title: "Transactions",
     icon: reactIcons.list,

@@ -12,19 +12,19 @@ import {
 
 function* fetchNotificationsWatcher(action) {
   try {
-    const {  notifications }=yield select(state=>state?.auth)
+    const { notifications } = yield select(state => state?.auth)
     const { data, status } = yield call(getAllUserNotifications, action.payload);
-    if(status===200){
-      let tempData=data 
-      if(notifications?.notifications?.length>0){
-         tempData.notifications=[...notifications?.notifications, ...data?.notifications]
+    if (status === 200) {
+      let tempData = data
+      if (notifications?.notifications?.length > 0) {
+        tempData.notifications = [...notifications?.notifications, ...data?.notifications]
         yield put(getUserNotifcationSuccess(tempData));
-      }else{
+      } else {
         yield put(getUserNotifcationSuccess(data));
 
       }
     }
-   
+
   } catch (e) {
     yield put(getUserNotifcationFailure());
   }
@@ -33,11 +33,11 @@ function* deleteNotificationsWatcher(action) {
   try {
     const { id } = action.payload
     const { notifications } = yield select(state => state?.auth)
-    const { status} = yield call(deleteNotification, action.payload?.id);
+    const { status } = yield call(deleteNotification, action.payload?.id);
     if (status === 200) {
       let payload
       const tempNotifications = notifications?.notifications?.filter(item => item?._id !== id)
-      const totalNotifications = notifications?.totalNotifications > 0? notifications?.totalNotifications-1:0
+      const totalNotifications = notifications?.totalNotifications > 0 ? notifications?.totalNotifications - 1 : 0
       payload = {
         ...notifications,
         notifications: tempNotifications,
@@ -52,13 +52,13 @@ function* deleteNotificationsWatcher(action) {
 function* readNotifiationsWatcher(action) {
   try {
     const { id } = action.payload
-    const {notifications}=yield select(state=>state?.auth)
+    const { notifications } = yield select(state => state?.auth)
     const { status } = yield call(readNotification, action.payload?.id);
-   
-    if(status===200){
+
+    if (status === 200) {
       const tempNotifications = notifications?.notifications?.map(item => {
-        if (item?._id === id){
-          return { ...item, isRead:true }
+        if (item?._id === id) {
+          return { ...item, isRead: true }
         }
         return item
       })
@@ -69,7 +69,7 @@ function* readNotifiationsWatcher(action) {
       }
       yield put(readNotificationComplete(payload));
     }
-   
+
   } catch (e) {
     yield put(readNotificationComplete());
   }

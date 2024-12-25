@@ -20,8 +20,14 @@ import AddMatch from "./dashboard/AddMatch";
 import UserDetails from "./dashboard/UserDetails";
 import AddPrize from "./dashboard/AddPrize";
 import AllTransactions from "./dashboard/AllTransactions";
+import AllQuiz from "./dashboard/AllQuiz";
+import AddQuizQuestion from "./dashboard/AddQuizQuestion";
+import UpdateQuizQuestion from "./dashboard/UpdateQuizQuestion";
 
 export {
+  UpdateQuizQuestion,
+  AddQuizQuestion,
+  AllQuiz,
   UserHoldings,
   AllTransactions,
   AboutUs,

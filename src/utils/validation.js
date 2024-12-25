@@ -158,3 +158,40 @@ export const contactValidationSchema = yup.object().shape({
         .string()
         .required("Message is required"),
 });
+
+export const createQuizValidationSchema = yup.object().shape({
+    name: yup
+        .string()
+        .required("Field is required"),
+    questionCount: yup
+        .number()
+        .required("Field is required"),
+    rightMark: yup
+        .number()
+        .required("Field is required"),
+    negativeMark: yup
+        .number()
+        .required("Field is required"),
+
+});
+export const createQuizQuestionSchema = (length) => {
+    return yup.object().shape({
+        questions: yup.array().of(
+            yup.object().shape({
+                question: yup.string()
+                    .required('Question is required'),
+                option1: yup.string()
+                    .required('Option 1 is required'),
+                option2: yup.string()
+                    .required('Option 2 is required'),
+                option3: yup.string()
+                    .required('Option 3 is required'),
+                option4: yup.string()
+                    .required('Option 4 is required'),
+                answer: yup.string()
+                    .oneOf(['A', 'B', 'C', 'D'], 'Answer must be one of A, B, C, or D')
+                    .required('Answer is required'),
+            })
+        ).min(length, 'At least one question is required'),
+    });
+}
