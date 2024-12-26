@@ -8,22 +8,14 @@ import {
   Home,
   AllUsers,
   ResetPassword,
-  Profile,
   UserDetails,
-  Pricing,
-  ContactUs,
-  AboutUs,
   AllTransactions,
   UserStocks,
-  Strategy,
-  UserDashboard,
-  Markets,
-  NetPosition,
-  Portfolio,
   UserHoldings,
   AllQuiz,
   AddQuizQuestion,
-  UpdateQuizQuestion
+  UpdateQuizQuestion,
+  QuizPlay
 } from "./pages";
 import { getUser } from "./api/api";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,8 +25,6 @@ import { useEffect } from "react";
 import MainLayout from "./components/layout/MainLayout";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import RenderModal from "./RenderModal";
-import UserLayout from "./components/layout/UserLayout";
-import Funds from "./pages/components/Funds";
 import ProtectedRoutes from "./ProtectedRoutes";
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -65,19 +55,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
-            <Route path='/pricing' element={<Pricing />} />
-            <Route path='/contact' element={<ContactUs />} />
-            <Route path='/about' element={<AboutUs />} />
-            <Route path='/strategy' element={<Strategy />} />
-          </Route>
-          <Route path="/user" element={<ProtectedRoutes><UserLayout /></ProtectedRoutes>}>
-            <Route index element={<UserDashboard />} />
-            <Route path='dashboard' element={<UserDashboard />} />
-            <Route path='funds' element={<Funds user={user} />} />
-            <Route path='portfolio' element={<Portfolio />} />
-            <Route path='markets' element={<Markets />} />
-            <Route path="net-position" element={<NetPosition />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="play-quiz/:quizId" element={<QuizPlay />} />
           </Route>
           <Route path="/dashboard" element={<ProtectedRoutes><DashboardLayout /></ProtectedRoutes>}>
             <Route index element={<Dashboard />} />

@@ -67,14 +67,14 @@
   td {
     @apply align-middle text-xs md:text-sm py-6 px-2   first:text-left first:pl-4 md:whitespace-normal whitespace-nowrap;
   }
- 
+
   tr {
     @apply border-b hover:bg-gray-200  text-center;
   }
   .user-layout tr {
     @apply border-b-dark hover:bg-primary-darkBlueSupport;
   }
-  .user-layout .icon-color svg{
+  .user-layout .icon-color svg {
     @apply text-white fill-white;
   }
 }
@@ -179,7 +179,7 @@
     @apply text-red-600 text-sm;
   }
   .border-c {
-    @apply border border-zinc-300;
+    @apply border border-zinc-200;
   }
   .border-dark {
     @apply border border-blue-950;

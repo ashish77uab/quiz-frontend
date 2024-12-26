@@ -48,7 +48,7 @@ const Login = ({ closeModal }) => {
         if (data?.result?.role === 'Admin') {
           navigate("/dashboard");
         } else {
-          navigate("/user/dashboard");
+          navigate("/");
         }
       } else {
         toast.error(<ToastMsg title={data.message} />);

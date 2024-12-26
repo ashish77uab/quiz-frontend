@@ -40,23 +40,12 @@ const Navbar = () => {
           <div className="flex items-center justify-between">
             <div className="">
               <Link to="/" className="">
-                <img className={`md:w-[206px] w-[115px]`} src="/images/logo.png" alt="log" />
+                <span className="text-xl font-bold text-primary-pink">
+                  Play Quiz
+                </span>
               </Link>
             </div>
-            <div className="flex-grow  justify-end mr-10 items-center lg:flex hidden">
-              {navbarMainLinks?.map((item) => {
-                return (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={`font-semibold relative flex-center flex-col  ${toggle ? 'text-gray-800 hover:text-primary-pink ' : 'text-white hover:opacity-75'}  px-8  ${item.path === window.location.pathname ? "text-primary-pink [&>div]:block" : ""
-                      }`}
-                  >
-                    {item.title} <div className={`w-[5px] h-[5px] hidden rounded-full absolute bottom-[-4px]  ${!toggle ? 'bg-primary-white' : 'bg-primary-pink'}`}></div>
-                  </Link>
-                )
-              })}
-            </div>
+
             <div className="flex gap-2 items-center">
               {isLoggedIn && (
                 <div className="flex items-center md:gap-4 gap-2">
@@ -86,7 +75,6 @@ const Navbar = () => {
                       <Menu.Items className="absolute right-0 mt-2 w-[300px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="px-1 py-2 space-y-2 ">
                           <div className="flex flex-col items-center gap-1 px-2 py-2 border-b border-b-zinc-300 mb-2">
-                            <img className="w-16 h-16 rounded-full object-cover shadow-num " src={user?.clientImage} alt="" />
                             <p className="font-bold">{user?.fullName}</p>
                             <p className="text-muted text-sm font-medium">{user?.email}</p>
 

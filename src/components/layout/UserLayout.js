@@ -1,13 +1,13 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import UserNavbar from "./UserNavbar";
 import { userMenuLinks } from "../../utils/constants";
+import Navbar from "./Navbar";
 
 const UserLayout = () => {
   return (
     <>
       <div className="flex flex-col justify-between min-h-screen bg-primary-darkBlue text-white text-sm user-layout">
-        <UserNavbar />
+        <Navbar />
         <div className="flex-grow px-2 lg:px-6 py-4 lg:pb-0 pb-20">
           <Outlet />
         </div>

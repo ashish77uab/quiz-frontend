@@ -1,25 +1,23 @@
 import React, { useEffect, useState } from "react";
 import ToastMsg from "../components/toast/ToastMsg";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
-import { getAllQuizList } from "../api/api";
+import { useParams } from "react-router-dom";
+import { getQuizQuestionList } from "../api/api";
 
 
-const Home = () => {
-  const navigate = useNavigate();
-  const limit = 10
-  const [quizes, setQuizes] = useState(null);
-  const [page, setPage] = useState(1);
+const QuizPlay = () => {
+  const { quizId } = useParams();
+  const [questions, setQuestions] = useState(null);
   const [fetchLoading, setFetchLoading] = useState(false);
 
 
-  const getAllQuiz = async () => {
+  const getAllQuizQuestion = async (quizId) => {
     setFetchLoading(true)
     try {
-      const res = await getAllQuizList({ limit, page, search: '' });
+      const res = await getQuizQuestionList(quizId);
       const { status, data } = res;
       if (status >= 200 && status <= 300) {
-        setQuizes(data);
+        setQuestions(data?.quizes);
       } else {
         toast.error(<ToastMsg title={data.message} />);
       }
@@ -32,21 +30,18 @@ const Home = () => {
 
 
   useEffect(() => {
-    getAllQuiz();
-  }, [page]);
+    getAllQuizQuestion(quizId);
+  }, [quizId]);
 
 
   return (
     <section className="flex-1 px-4 py-4">
       <div className="space-y-2">
-        {quizes?.quizes?.map((quiz, index) => {
+        {questions?.map((quiz, index) => {
           return (
-            <Link to={`/play-quiz/${quiz?._id}`} className="border-c py-3 px-3 block rounded-md shadow-card cursor-pointer">
+            <div className="border-c py-4 px-4 rounded-md shadow-card cursor-pointer">
               <div>
-                <p className="font-semibold text-primary-pink"> {quiz?.name}</p>
-                <div>
-                  <div className="text-xs font-semibold text-muted"><span>Total questions:</span> <span>{quiz?.questionCount}</span></div>
-                </div>
+                <p className="font-medium text-sm"> <span>Q{index + 1}. </span>  {quiz?.question}</p>
               </div>
               <div className="flex justify-between gap-4 items-start mt-2">
                 <div>
@@ -61,7 +56,7 @@ const Home = () => {
 
 
 
-            </Link>
+            </div>
           )
         }
 
@@ -73,4 +68,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default QuizPlay;

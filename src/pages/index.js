@@ -1,17 +1,10 @@
 import Login from "./Login";
 import Register from "./Register";
 import Profile from "./Profile";
-import NetPosition from "./NetPosition";
-import Markets from "./Markets";
-import Strategy from "./Strategy";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
+import QuizPlay from "./QuizPlay";
 import Home from "./Home";
-import Pricing from "./Pricing";
-import AboutUs from "./AboutUs";
-import ContactUs from "./ContactUs";
-import UserDashboard from "./UserDashboard";
-import Portfolio from "./Portfolio";
 import Dashboard from "./dashboard/Dashboard";
 import UserStocks from "./dashboard/UserStocks";
 import UserHoldings from "./dashboard/UserHoldings";
@@ -25,13 +18,12 @@ import AddQuizQuestion from "./dashboard/AddQuizQuestion";
 import UpdateQuizQuestion from "./dashboard/UpdateQuizQuestion";
 
 export {
+  QuizPlay,
   UpdateQuizQuestion,
   AddQuizQuestion,
   AllQuiz,
   UserHoldings,
   AllTransactions,
-  AboutUs,
-  ContactUs,
   Login,
   Register,
   Profile,
@@ -44,10 +36,5 @@ export {
   AddMatch,
   AddPrize,
   UserDetails,
-  Pricing,
-  NetPosition,
-  Markets,
-  Strategy,
-  UserDashboard,
-  Portfolio
+
 };
