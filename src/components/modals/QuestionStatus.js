@@ -44,7 +44,7 @@ const QuestionStatus = ({ isOpen, closeModal }) => {
                             leaveTo="opacity-0 scale-95"
                         >
                             <Dialog.Panel
-                                className=" overflow-hidden relative  !rounded-md     transition-all max-w-lg w-full  bg-white !px-4  h-full   shadow-lg"
+                                className=" overflow-hidden relative  !rounded-md     transition-all max-w-md w-full  bg-white !px-4  h-full   shadow-lg"
                             >
                                 <div className="flex justify-between items-center gap-4  py-4">
                                     <Link to={'/'} onClick={closeModal}>

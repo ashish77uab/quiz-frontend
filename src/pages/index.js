@@ -4,6 +4,7 @@ import Profile from "./Profile";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
 import QuizPlay from "./QuizPlay";
+import QuizResult from "./QuizResult";
 import Home from "./Home";
 import Dashboard from "./dashboard/Dashboard";
 import UserStocks from "./dashboard/UserStocks";
@@ -18,6 +19,7 @@ import AddQuizQuestion from "./dashboard/AddQuizQuestion";
 import UpdateQuizQuestion from "./dashboard/UpdateQuizQuestion";
 
 export {
+  QuizResult,
   QuizPlay,
   UpdateQuizQuestion,
   AddQuizQuestion,

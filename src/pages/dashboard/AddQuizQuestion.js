@@ -51,7 +51,7 @@ const AddQuizQuestion = () => {
         }
     };
 
-    const getQuizQuestions = async (id) => {
+    const getQuizInfoById = async (id) => {
         try {
             const res = await getQuizInfo(id);
             const { status, data } = res;
@@ -69,7 +69,7 @@ const AddQuizQuestion = () => {
 
     useEffect(() => {
         if (quizId) {
-            getQuizQuestions(quizId);
+            getQuizInfoById(quizId);
         }
     }, [quizId]);
     // console.log(initialValue)

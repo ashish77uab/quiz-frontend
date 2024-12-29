@@ -21,7 +21,7 @@ const Option = ({ text, num, dispatch }) => {
     )
 
 }
-const SingleQuestion = ({ question, currentQuestion, dispatch, isIncludedReview }) => {
+const SingleQuestion = ({ question, currentQuestion, dispatch, isIncludedReview, quizInfo }) => {
     const { questionTimer } = useQuestionTime()
     return (
         <div className="cursor-pointer">
@@ -33,6 +33,10 @@ const SingleQuestion = ({ question, currentQuestion, dispatch, isIncludedReview 
                         <div>
                             <span className="text-xs font-semibold mr-1"> {questionTimer} </span>
                         </div>
+                    </div>
+                    <div className="flex items-center gap-1">
+                        <div className='bg-green-200   px-3 py-1 rounded-md text-xs'>+ {quizInfo?.rightMark}</div>
+                        <div className='bg-red-200   px-3 py-1 rounded-md text-xs'>- {quizInfo?.negativeMark}</div>
                     </div>
 
                 </div>

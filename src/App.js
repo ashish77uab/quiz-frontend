@@ -15,7 +15,8 @@ import {
   AllQuiz,
   AddQuizQuestion,
   UpdateQuizQuestion,
-  QuizPlay
+  QuizPlay,
+  QuizResult
 } from "./pages";
 import { getUser } from "./api/api";
 import { useDispatch, useSelector } from "react-redux";
@@ -56,6 +57,7 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="play-quiz/:quizId/:quizName" element={<QuizPlay />} />
+            <Route path="/quiz/result/:quizId" element={<QuizResult />} />
           </Route>
           <Route path="/dashboard" element={<ProtectedRoutes><DashboardLayout /></ProtectedRoutes>}>
             <Route index element={<Dashboard />} />
