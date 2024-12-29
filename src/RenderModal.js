@@ -3,28 +3,32 @@ import SignUpModal from './components/modals/SignUpModal'
 import { useDispatch, useSelector } from 'react-redux';
 import { setModalToggle } from './redux/features/authSlice';
 import LoginModal from './components/modals/LoginModal';
+import QuestionStatus from './components/modals/QuestionStatus';
 
 const RenderModal = () => {
-    const { isLoginOpen, isSignUpOpen } = useSelector((state) => state.auth);
+    const { isLoginOpen, isSignUpOpen, isQuestionStatusOpen } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
-    const handleAuthToggle = (obj) => {
+    const handleToggle = (obj) => {
         dispatch(setModalToggle(obj))
     }
     return (
         <>
             <SignUpModal
                 isOpen={isSignUpOpen}
-                handleAuthToggle={handleAuthToggle}
+                handleAuthToggle={handleToggle}
                 closeModal={() => {
-                    handleAuthToggle({ key: 'isSignUpOpen', value: false })
+                    handleToggle({ key: 'isSignUpOpen', value: false })
                 }} />
             <LoginModal
                 isOpen={isLoginOpen}
-                handleAuthToggle={handleAuthToggle}
+                handleAuthToggle={handleToggle}
                 closeModal={() => {
-                    handleAuthToggle({ key: 'isLoginOpen', value: false })
+                    handleToggle({ key: 'isLoginOpen', value: false })
                 }}
             />
+            <QuestionStatus
+                isOpen={isQuestionStatusOpen}
+                closeModal={() => handleToggle({ key: 'isQuestionStatusOpen', value: false })} />
         </ >
     )
 }

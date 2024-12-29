@@ -20,11 +20,11 @@ const footerLinks = [
 const Footer = () => {
     return (
         <footer >
-            <div className="px-4 bg-gray-50 py-4">
+            {/* <div className="px-4 bg-gray-50 py-4">
                 <p className='text-muted text-center'>
                     &copy; 2025. All rights reserved.
                 </p>
-            </div>
+            </div> */}
         </footer>
     )
 }

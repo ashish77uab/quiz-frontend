@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { reactIcons } from "../../utils/icons";
 import { setLogout, setModalToggle, } from "../../redux/features/authSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { getUserToken, navbarLinks, userMenuLinks } from "../../utils/constants";
+import { getUserToken, navbarLinks } from "../../utils/constants";
 
 
 import React from 'react'
-import MobileMenu from "../modals/MobileMenu";
 import AuthButton from "../../pages/components/AuthButton";
 import { useScrollToTop } from "../../hooks/useScrollToTop";
 
@@ -16,8 +15,6 @@ import { useScrollToTop } from "../../hooks/useScrollToTop";
 
 const Navbar = () => {
   useScrollToTop()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  // const isRequireToggle = pathsRequireToggle?.includes(window.location.pathname)
   const toggle = true
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,11 +29,10 @@ const Navbar = () => {
   }
 
   const isLoggedIn = getUserToken()
-  const navbarMainLinks = navbarLinks
   return (
     <>
       <nav className={`flex items-center  shadow-navbar border-b border-b-zinc-50 bg-transparent transition-all duration-200 py-[10px] sticky top-0 left-0  bg w-full z-[50] ${toggle ? 'bg-white' : 'bg-transparent'}`}>
-        <div className="container">
+        <div className="px-4 w-full">
           <div className="flex items-center justify-between">
             <div className="">
               <Link to="/" className="">
@@ -148,19 +144,14 @@ const Navbar = () => {
                   />
                 )}
               </div>
-              <div onClick={() => setIsMobileMenuOpen(true)} className={`w-10 h-10 flex-center text-3xl  lg:hidden ${toggle ? 'text-primary-gray' : 'text-white'}`}>
+              <div onClick={() => handleAuthToggle({ key: 'isQuestionStatusOpen', value: true })} className={`w-10 h-10 flex-center text-3xl cursor-pointer `}>
                 {reactIcons.menu}
               </div>
             </div>
           </div>
         </div>
       </nav>
-      <MobileMenu
-        handleSignUpClick={() => handleAuthToggle({ key: 'isSignUpOpen', value: true })}
-        handleSignInClick={() => handleAuthToggle({ key: 'isLoginOpen', value: true })}
-        toggle={toggle}
-        isOpen={isMobileMenuOpen}
-        closeModal={() => setIsMobileMenuOpen(false)} />
+
     </>
   );
 };

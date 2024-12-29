@@ -2,8 +2,8 @@ import React from "react";
 import { FiTrash2 } from "react-icons/fi";
 import { FaImage, FaMap, FaMoneyBill, FaUsers } from "react-icons/fa";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { MdOutlineMarkChatUnread, MdOutlineMarkChatRead } from "react-icons/md";
-import { GoDotFill } from "react-icons/go";
+import { MdOutlineMarkChatUnread, MdOutlineMarkChatRead, MdAccessTime } from "react-icons/md";
+import { GoDotFill, GoStar, GoStarFill } from "react-icons/go";
 import { FaWhatsapp } from "react-icons/fa";
 import {
   BiDollarCircle,
@@ -27,7 +27,6 @@ import {
   BsChevronRight,
   BsFillBoxFill,
   BsFillCheckCircleFill,
-  BsPlusLg,
   BsReply,
   BsThreeDotsVertical,
   BsWallet2,
@@ -42,7 +41,6 @@ import {
   AiFillStar,
   AiOutlineHeart,
   AiOutlineLike,
-  AiOutlineMinus,
   AiOutlineStar,
   AiOutlineUnorderedList,
 } from "react-icons/ai";
@@ -59,6 +57,9 @@ import { GiChart } from "react-icons/gi";
 import { AiOutlineSafety } from "react-icons/ai";
 import { FaUserPlus } from "react-icons/fa6";
 export const reactIcons = {
+  star: <GoStar />,
+  starFill: <GoStarFill />,
+  watch: <MdAccessTime />,
   userPlus: <FaUserPlus />,
   money: <FaMoneyBill />,
   whatsapp: <FaWhatsapp />,

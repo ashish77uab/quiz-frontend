@@ -3,6 +3,7 @@ import ToastMsg from "../components/toast/ToastMsg";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { getAllQuizList } from "../api/api";
+import { getUserToken } from "../utils/constants";
 
 
 const Home = () => {
@@ -11,7 +12,7 @@ const Home = () => {
   const [quizes, setQuizes] = useState(null);
   const [page, setPage] = useState(1);
   const [fetchLoading, setFetchLoading] = useState(false);
-
+  const isLoggedIn = getUserToken()
 
   const getAllQuiz = async () => {
     setFetchLoading(true)
@@ -33,7 +34,7 @@ const Home = () => {
 
   useEffect(() => {
     getAllQuiz();
-  }, [page]);
+  }, [page, isLoggedIn]);
 
 
   return (
@@ -41,7 +42,7 @@ const Home = () => {
       <div className="space-y-2">
         {quizes?.quizes?.map((quiz, index) => {
           return (
-            <Link to={`/play-quiz/${quiz?._id}`} className="border-c py-3 px-3 block rounded-md shadow-card cursor-pointer">
+            <Link to={`/play-quiz/${quiz?._id}/${quiz?.name}`} className="border-c py-3 px-3 block rounded-md shadow-card cursor-pointer">
               <div>
                 <p className="font-semibold text-primary-pink"> {quiz?.name}</p>
                 <div>

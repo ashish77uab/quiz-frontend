@@ -8,9 +8,9 @@ const MainLayout = () => {
 
 
   return (
-    <div className="flex flex-col justify-between min-h-screen max-w-xl mx-auto border-x border-x-zinc-100">
+    <div className="flex flex-col justify-between min-h-screen max-w-md mx-auto border-x border-x-zinc-100">
       <Navbar />
-      <div className="flex-grow">
+      <div className="flex-grow flex flex-col relative">
         <Outlet />
       </div>
       <Footer />

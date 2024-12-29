@@ -55,7 +55,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
-            <Route path="play-quiz/:quizId" element={<QuizPlay />} />
+            <Route path="play-quiz/:quizId/:quizName" element={<QuizPlay />} />
           </Route>
           <Route path="/dashboard" element={<ProtectedRoutes><DashboardLayout /></ProtectedRoutes>}>
             <Route index element={<Dashboard />} />

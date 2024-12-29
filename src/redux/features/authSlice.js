@@ -10,24 +10,24 @@ const authSlice = createSlice({
     error: "",
     loading: false,
     notifications: {
-      notifications:[],
+      notifications: [],
       totalNotifications: 0,
     },
     notificationsLoading: false,
     updateLoading: false,
     isNewNotification: isNewNotification,
-    usersToChat:{},
-    isLoginOpen:false,
-    isSignUpOpen:false
+    usersToChat: {},
+    isLoginOpen: false,
+    isSignUpOpen: false,
+    isQuestionStatusOpen: false
   },
   reducers: {
-   
     setUsersToChat: (state, action) => {
       state.usersToChat = action.payload;
     },
     setModalToggle: (state, action) => {
-      const {key, value} =  action.payload
-      state[key]= value;
+      const { key, value } = action.payload
+      state[key] = value;
     },
     setUser: (state, action) => {
       state.user = action.payload;
@@ -36,10 +36,10 @@ const authSlice = createSlice({
       state.isNewNotification = action.payload;
     },
     updateNotification: (state, action) => {
-      state.notifications = { ...state?.notifications, notifications: [action.payload,...state?.notifications?.notifications], totalNotifications: state?.notifications?.totalNotifications+1 };
+      state.notifications = { ...state?.notifications, notifications: [action.payload, ...state?.notifications?.notifications], totalNotifications: state?.notifications?.totalNotifications + 1 };
     },
     updateUserWallet: (state, action) => {
-      const newAmount=Number(state.user.wallet.amount)-Number(action.payload)
+      const newAmount = Number(state.user.wallet.amount) - Number(action.payload)
       state.user.wallet.amount = newAmount;
     },
     updateUserCarts: (state, action) => {
@@ -85,7 +85,7 @@ const authSlice = createSlice({
     getUserNotifcationFailure: (state, action) => {
       state.notificationsLoading = false;
     },
-    
+
   },
   extraReducers: {},
 });
