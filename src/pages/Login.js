@@ -2,26 +2,24 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import ToastMsg from "../components/toast/ToastMsg";
 import { getUser, login } from "../api/api";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { reactIcons } from "./../utils/icons";
 import TextInput from "../components/forms/TextInput";
 import { loginValidationSchema } from "../utils/yup";
 import { useDispatch } from "react-redux";
-import { setModalToggle, setUser } from "../redux/features/authSlice";
+import { setUser } from "../redux/features/authSlice";
 import { Formik, Form } from 'formik';
 
 const initialState = {
   email: "",
   password: "",
 };
-const Login = ({ closeModal }) => {
+const Login = () => {
   const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
-  const handleAuthToggle = (obj) => {
-    dispatch(setModalToggle(obj))
-  }
+
   const getUserData = async () => {
     try {
       const res = await getUser();
@@ -44,7 +42,6 @@ const Login = ({ closeModal }) => {
         toast.success(<ToastMsg title={`Login Successfully`} />);
         localStorage.setItem("loginToken", data.token);
         getUserData()
-        closeModal()
         if (data?.result?.role === 'Admin') {
           navigate("/dashboard");
         } else {
@@ -60,8 +57,11 @@ const Login = ({ closeModal }) => {
       setIsLoading(false);
     }
   };
+  if (localStorage.getItem("loginToken")) {
+    return <Navigate to="/" />
+  }
   return (
-    <>
+    <div className="flex-center min-h-screen py-4 px-4 bg-pink-50">
       <Formik
         initialValues={initialState}
         validationSchema={loginValidationSchema}
@@ -73,7 +73,7 @@ const Login = ({ closeModal }) => {
           handleBlur,
         }) => {
           return (
-            <Form className=" w-full space-y-2 ">
+            <Form className=" w-full space-y-2 max-w-md shadow-card bg-white rounded-md py-10 px-6 ">
               <header className="py-4 text-center heading-4 text-primary-pink">Login</header>
               <div className="space-y-4">
                 <TextInput
@@ -107,7 +107,6 @@ const Login = ({ closeModal }) => {
                   <div className="text-muted">
                     <Link
                       to="/forgot-password"
-                      onClick={closeModal}
                       className="ml-2 text-blue-500 underline"
                     >
                       Forgot Password
@@ -117,12 +116,9 @@ const Login = ({ closeModal }) => {
                 <div className="text-center">
                   <p className="text-muted">
                     Don't have an account?{" "}
-                    <button type="button" onClick={() => {
-                      handleAuthToggle({ key: 'isSignUpOpen', value: true })
-                      handleAuthToggle({ key: 'isLoginOpen', value: false })
-                    }} className="ml-2 text-blue-500 underline" >
+                    <Link to="/register" className="ml-2 text-blue-500 underline" >
                       Create new account
-                    </button>
+                    </Link>
                   </p>{" "}
                 </div>
               </div>
@@ -138,7 +134,7 @@ const Login = ({ closeModal }) => {
           )
         }}
       </Formik>
-    </>
+    </div>
   );
 };
 

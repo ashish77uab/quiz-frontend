@@ -14,7 +14,7 @@ const Option = ({ text, num, dispatch }) => {
     }
 
     return (
-        <div onClick={() => handleSelectOption(num)} className={`flex items-center gap-4 rounded-md py-5 px-4 border-2 ${answerObj[num] === selectedOption ? 'border-primary-pink' : 'border-zinc-200'}`}>
+        <div onClick={() => handleSelectOption(num)} className={`flex items-center bg-white gap-4 rounded-md py-5 px-4 border ${answerObj[num] === selectedOption ? 'border-primary-pink' : 'border-zinc-200'}`}>
             <span className='font-semibold'>{answerObj[num]}.</span>
             <span className='font-medium'>{text}</span>
         </div>

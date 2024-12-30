@@ -6,7 +6,7 @@ const ProtectedRoutes = ({ children }) => {
   if (localStorage.getItem("loginToken")) {
     return children;
   }
-  return <Navigate to="/" />;
+  return <Navigate to="/login" />;
 };
 
 ProtectedRoutes.propTypes = {

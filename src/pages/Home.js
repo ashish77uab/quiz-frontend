@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ToastMsg from "../components/toast/ToastMsg";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getAllQuizList } from "../api/api";
 import { getUserToken } from "../utils/constants";
 
 
 const Home = () => {
-  const navigate = useNavigate();
   const limit = 10
   const [quizes, setQuizes] = useState(null);
   const [page, setPage] = useState(1);
@@ -39,28 +38,24 @@ const Home = () => {
 
   return (
     <section className="flex-1 px-4 py-4">
-      <div className="space-y-2">
-        {quizes?.quizes?.map((quiz, index) => {
+      <header>
+        <h6 className="heading-6 mb-1"> All Tests</h6>
+      </header>
+      <div className="space-y-2 mb-6">
+        {quizes?.quizes?.map((quiz) => {
           return (
-            <Link to={`/play-quiz/${quiz?._id}/${quiz?.name}`} className="border-c py-3 px-3 block rounded-md shadow-card cursor-pointer">
-              <div>
-                <p className="font-semibold text-primary-pink"> {quiz?.name}</p>
-                <div>
-                  <div className="text-xs font-semibold text-muted"><span>Total questions:</span> <span>{quiz?.questionCount}</span></div>
+            <Link key={quiz?._id} to={`/quiz-join/${quiz?._id}`} className="border-c  block rounded-md shadow-card bg-white cursor-pointer">
+              <div className="py-3 px-3">
+                <div className="px-3 py-1 bg-green-500 mb-1 text-white font-bold inline-block rounded-md text-xs">FREE</div>
+                <p className="font-semibold text-primary-grayDark mb-1"> {quiz?.name}</p>
+                <div className="flex items-center gap-1 justify-between">
+                  <div className="text-xs  text-muted"><span>{quiz?.questionCount} Qs .</span>  <span>25 mins.</span> <span>{quiz?.rightMark * quiz?.questionCount} Marks</span></div>
+                  <div className="text-primary-blue text-xs">Join Test</div>
                 </div>
               </div>
-              <div className="flex justify-between gap-4 items-start mt-2">
-                <div>
-                  <p className="text-sm font-semibold">Right Answer</p>
-                  <div className="text-xs font-semibold text-muted">{quiz?.rightMark} marks</div>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm font-semibold">Wrong Answer</p>
-                  <div className="text-xs font-semibold text-muted">{quiz?.negativeMark} marks</div>
-                </div>
+              <div className="py-2 px-3 bg-blue-50/50">
+                <div className="text-primary-blue text-xs">English</div>
               </div>
-
-
 
             </Link>
           )
@@ -68,6 +63,8 @@ const Home = () => {
 
         )}
       </div>
+
+
 
 
     </section>

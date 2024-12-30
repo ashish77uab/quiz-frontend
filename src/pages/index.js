@@ -5,6 +5,7 @@ import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
 import QuizPlay from "./QuizPlay";
 import QuizResult from "./QuizResult";
+import QuizJoin from "./QuizJoin";
 import Home from "./Home";
 import Dashboard from "./dashboard/Dashboard";
 import UserStocks from "./dashboard/UserStocks";
@@ -19,6 +20,7 @@ import AddQuizQuestion from "./dashboard/AddQuizQuestion";
 import UpdateQuizQuestion from "./dashboard/UpdateQuizQuestion";
 
 export {
+  QuizJoin,
   QuizResult,
   QuizPlay,
   UpdateQuizQuestion,

@@ -56,8 +56,17 @@ import { IoBarChart } from "react-icons/io5";
 import { GiChart } from "react-icons/gi";
 import { AiOutlineSafety } from "react-icons/ai";
 import { FaUserPlus } from "react-icons/fa6";
+import { FiFlag } from "react-icons/fi";
+import { CiTrophy } from "react-icons/ci";
+import { CgNotes } from "react-icons/cg";
+import { FaQuestion } from "react-icons/fa6";
+
 export const reactIcons = {
+  question: <FaQuestion />,
   star: <GoStar />,
+  flag: <FiFlag />,
+  notes: <CgNotes />,
+  trophy: <CiTrophy />,
   starFill: <GoStarFill />,
   watch: <MdAccessTime />,
   userPlus: <FaUserPlus />,

@@ -17,7 +17,7 @@ const TextInput = ({
   return (
     <div className="flex flex-col gap-1">
       {label && <div className="flex items-center w-full justify-between gap-4">
-        {<label className={labelClassName} htmlFor="">{label}</label>}
+        {<label className={`${labelClassName} text-sm font-medium`} htmlFor="">{label}</label>}
         {labelAddon && labelAddon}
       </div>
       }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import ToastMsg from "../components/toast/ToastMsg";
 import { register } from "../api/api";
 import { reactIcons } from "../utils/icons";
@@ -9,10 +9,9 @@ import { userValidationSchema } from "../utils/yup";
 import { serialize } from 'object-to-formdata'
 import ReactSelect from "../components/forms/ReactSelect";
 import { useDispatch } from "react-redux";
-import { setModalToggle, setUser } from "../redux/features/authSlice";
-import { useNavigate } from "react-router-dom";
+import { setUser } from "../redux/features/authSlice";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 const genders = [{ label: "Male", value: "male" }, { label: "Female", value: "female" }, { label: "Others", value: "others" }]
-const accounts = [{ label: "Saving", value: "saving" }, { label: "Current", value: "current" }]
 const initialState = {
   firstName: "",
   lastName: "",
@@ -23,7 +22,7 @@ const initialState = {
   password: "",
   confirmPassword: "",
 };
-const Register = ({ closeModal }) => {
+const Register = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [select, setSelect] = useState({
@@ -32,9 +31,7 @@ const Register = ({ closeModal }) => {
   });
   const [toggle, setToggle] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const handleAuthToggle = (obj) => {
-    dispatch(setModalToggle(obj))
-  }
+
   const handleReset = () => {
     setSelect({
       gender: '',
@@ -53,9 +50,8 @@ const Register = ({ closeModal }) => {
         toast.success(<ToastMsg title={`Register Successfully`} />);
         localStorage.setItem("loginToken", data.token);
         dispatch(setUser(data?.user));
-        closeModal()
         handleReset();
-        navigate("/wishlist");
+        navigate("/");
       } else {
         toast.error(<ToastMsg title={data.message} />);
       }
@@ -65,8 +61,11 @@ const Register = ({ closeModal }) => {
     } finally { setIsLoading(false) }
 
   };
+  if (localStorage.getItem("loginToken")) {
+    return <Navigate to="/" />
+  }
   return (
-    <>
+    <div className="flex-center min-h-screen py-4 px-4 bg-pink-50">
       <Formik
         initialValues={initialState}
         validationSchema={userValidationSchema}
@@ -79,11 +78,11 @@ const Register = ({ closeModal }) => {
           handleBlur,
         }) => {
           return (
-            <Form className="w-full space-y-2">
-              <h3 className="py-4 heading-4 text-center capitalize">
+            <Form className="w-full space-y-2 max-w-md shadow-card bg-white rounded-md py-10 px-6 ">
+              <h3 className="mb-2 heading-4 text-center capitalize">
                 Create new account
               </h3>
-              <div className="px-4 lg:px-6 grid grid-cols-1 gap-4">
+              <div className=" grid grid-cols-2 gap-4">
                 <TextInput
                   label={"First Name"}
                   type="text"
@@ -103,7 +102,7 @@ const Register = ({ closeModal }) => {
                   onBlur={handleBlur}
                   value={values.lastName}
                 />
-                <div>
+                <div className="col-span-2">
                   <TextInput
                     label={"Email"}
                     type="text"
@@ -114,7 +113,7 @@ const Register = ({ closeModal }) => {
                     value={values.email}
                   />
                 </div>
-                <div>
+                <div className="col-span-2">
                   <TextInput
                     label={"Phone"}
                     type="text"
@@ -125,7 +124,7 @@ const Register = ({ closeModal }) => {
                     value={values.phone}
                   />
                 </div>
-                <div>
+                <div className="col-span-2">
                   <TextInput
                     label={"Date of birth"}
                     type="date"
@@ -136,7 +135,7 @@ const Register = ({ closeModal }) => {
                     value={values.dob}
                   />
                 </div>
-                <div>
+                <div className="col-span-2">
                   <ReactSelect
                     name='gender'
                     label={"Select Gender"}
@@ -149,49 +148,50 @@ const Register = ({ closeModal }) => {
                     }}
                   />
                 </div>
-                <TextInput
-                  label={"Password"}
-                  type={toggle ? "text" : "password"}
-                  placeholder="password"
-                  name="password"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.password}
-                  addonRight={
-                    <span
-                      onClick={() => setToggle(!toggle)}
-                      className="w-8 h-8 ay-center cursor-pointer right-2 flex-center rounded-md hover:bg-white/80 text-lg text-gray-600"
-                    >
-                      {toggle ? reactIcons.eye : reactIcons.eyeslash}
-                    </span>
-                  }
-                />
-                <TextInput
-                  label={"Confirm Password"}
-                  type={toggle ? "text" : "password"}
-                  placeholder="confirm password"
-                  name="confirmPassword"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.confirmPassword}
-                  addonRight={
-                    <span
-                      onClick={() => setToggle(!toggle)}
-                      className="w-8 h-8 ay-center cursor-pointer right-2 flex-center rounded-md hover:bg-white/80 text-lg text-gray-600"
-                    >
-                      {toggle ? reactIcons.eye : reactIcons.eyeslash}
-                    </span>
-                  }
-                />
-                <div>
+                <div className="col-span-2">
+                  <TextInput
+                    label={"Password"}
+                    type={toggle ? "text" : "password"}
+                    placeholder="password"
+                    name="password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                    addonRight={
+                      <span
+                        onClick={() => setToggle(!toggle)}
+                        className="w-8 h-8 ay-center cursor-pointer right-2 flex-center rounded-md hover:bg-white/80 text-lg text-gray-600"
+                      >
+                        {toggle ? reactIcons.eye : reactIcons.eyeslash}
+                      </span>
+                    }
+                  />
+                </div>
+                <div className="col-span-2">
+                  <TextInput
+                    label={"Confirm Password"}
+                    type={toggle ? "text" : "password"}
+                    placeholder="confirm password"
+                    name="confirmPassword"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.confirmPassword}
+                    addonRight={
+                      <span
+                        onClick={() => setToggle(!toggle)}
+                        className="w-8 h-8 ay-center cursor-pointer right-2 flex-center rounded-md hover:bg-white/80 text-lg text-gray-600"
+                      >
+                        {toggle ? reactIcons.eye : reactIcons.eyeslash}
+                      </span>
+                    }
+                  />
+                </div>
+                <div className="col-span-2">
                   <p className="text-muted">
                     Already have an account?{" "}
-                    <button type="button" onClick={() => {
-                      handleAuthToggle({ key: 'isSignUpOpen', value: false })
-                      handleAuthToggle({ key: 'isLoginOpen', value: true })
-                    }} className="ml-2 text-blue-500 underline" >
+                    <Link to={'/login'} className="ml-2 text-blue-500 underline" >
                       Login
-                    </button>
+                    </Link>
                   </p>{" "}
                 </div>
               </div>
@@ -204,7 +204,7 @@ const Register = ({ closeModal }) => {
           )
         }}
       </Formik>
-    </>
+    </div>
   );
 };
 

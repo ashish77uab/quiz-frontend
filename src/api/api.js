@@ -221,7 +221,8 @@ export const updateQuiz = (data, quizId) => API.put(`quiz/update-quiz/${quizId}`
 export const getQuizInfo = (quizId) => API.get(`quiz/single-quiz/${quizId}`);
 export const deleteQuiz = (quizId) => API.delete(`quiz/delete-quiz/${quizId}`);
 export const submitQuiz = (data) => API.post(`quiz/submit-quiz`, data);
-export const quizDashboard = (quizId) => API.get(`quiz/dashboard?quizId=${quizId}`);
+export const quizAttemptedResult = (quizId) => API.get(`quiz/attempted-result?quizId=${quizId}`);
+export const quizSingleResult = (resultId, quizId) => API.get(`quiz/single-result?resultId=${resultId}&quizId=${quizId}`);
 
 // question
 export const getQuizQuestionList = (quizId) => API.get(`question/list?quizId=${quizId}`);

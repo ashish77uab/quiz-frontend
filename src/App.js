@@ -16,7 +16,10 @@ import {
   AddQuizQuestion,
   UpdateQuizQuestion,
   QuizPlay,
-  QuizResult
+  QuizResult,
+  QuizJoin,
+  Login,
+  Register
 } from "./pages";
 import { getUser } from "./api/api";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,10 +57,11 @@ function App() {
       <BrowserRouter>
         <RenderModal />
         <Routes>
-          <Route path="/" element={<MainLayout />}>
+          <Route path="/" element={<ProtectedRoutes><MainLayout /></ProtectedRoutes>}>
             <Route index element={<Home />} />
-            <Route path="play-quiz/:quizId/:quizName" element={<QuizPlay />} />
-            <Route path="/quiz/result/:quizId" element={<QuizResult />} />
+            <Route path="play-quiz/:quizId" element={<QuizPlay />} />
+            <Route path="/quiz/result/:resultId/:quizId" element={<QuizResult />} />
+            <Route path="/quiz-join/:quizId" element={<QuizJoin />} />
           </Route>
           <Route path="/dashboard" element={<ProtectedRoutes><DashboardLayout /></ProtectedRoutes>}>
             <Route index element={<Dashboard />} />
@@ -72,6 +76,8 @@ function App() {
           </Route>
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/passwordReset" element={<ResetPassword />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer
