@@ -5,11 +5,6 @@ const quizSlice = createSlice({
   initialState: {
     questions: [],
     currentQuestion: 0,
-    review: [],
-    answered: [],
-    selectedOption: null,
-    finished: false,
-    timeLeft: 60,
 
   },
   reducers: {
@@ -19,15 +14,6 @@ const quizSlice = createSlice({
     setCurrentQuestion: (state, action) => {
       state.currentQuestion = action.payload;
     },
-    setSelectedOption: (state, action) => {
-      state.selectedOption = action.payload;
-    },
-    setReviewed: (state, action) => {
-      state.review = action.payload;
-    },
-    setAnswered: (state, action) => {
-      state.answered = action.payload;
-    },
   },
   extraReducers: {},
 });
@@ -35,9 +21,6 @@ const quizSlice = createSlice({
 export const {
   setQuestions,
   setCurrentQuestion,
-  setSelectedOption,
-  setReviewed,
-  setAnswered
 } = quizSlice.actions;
 
 export default quizSlice.reducer;

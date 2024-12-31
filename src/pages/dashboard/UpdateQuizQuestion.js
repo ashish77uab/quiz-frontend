@@ -9,6 +9,7 @@ import { createQuizQuestionSchema } from "../../utils/validation";
 import DeleteButton from "../../components/button/DeleteButton";
 import { reactIcons } from "../../utils/icons";
 import ActionButton from "../../components/button/ActionButton";
+import EditorCustom from "../../components/forms/EditorCustom";
 const singleObject = {
     question: '',
     option1: '',
@@ -94,6 +95,7 @@ const UpdateQuizQuestion = () => {
                     values,
                     handleChange,
                     handleBlur,
+                    setFieldValue
                 }) => {
                     return (
                         <Form className="w-full space-y-4 mt-4">
@@ -105,15 +107,13 @@ const UpdateQuizQuestion = () => {
                                                 <div className="flex gap-2 items-start mb-6">
                                                     <div className="grid grid-cols-2 gap-4 flex-grow" key={index}>
                                                         <div className="col-span-2 flex-1">
-                                                            <TextInput
-                                                                label={`Question ${index + 1}`}
-                                                                name={`questions.${index}.question`}
-                                                                placeholder="Enter question"
-                                                                type="text"
-                                                                onChange={handleChange}
+                                                            <EditorCustom
+                                                                onEditorChange={(newValue, editor) => {
+                                                                    setFieldValue(`questions.${index}.question`, newValue)
+                                                                }
+                                                                }
                                                                 value={question.question}
-                                                                labelClassName='font-semibold'
-
+                                                                initialValue={question.question}
                                                             />
 
                                                         </div>

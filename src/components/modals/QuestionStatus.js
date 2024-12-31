@@ -3,20 +3,17 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { reactIcons } from "../../utils/icons";
-import { useSelector } from "react-redux";
+import useQuestionStatus from "../../hooks/useQuestionStatus";
 
 const QuestionStatus = ({ isOpen, closeModal }) => {
     const dialogRef = useRef(null);
     const {
+        totalQuestions,
+        totalReviewed,
+        totalAnswered,
         questions,
-        review,
-        answered,
         currentQuestion
-    } = useSelector((state) => state.quiz);
-    const totalQuestions = questions.length;
-    const totalReviewed = review.length;
-    const totalAnswered = answered.length;
-    const totalUnseen = totalQuestions - 1 - currentQuestion;
+    } = useQuestionStatus()
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-[1000]" onClose={closeModal} initialFocus={dialogRef ? dialogRef : undefined}>
@@ -76,50 +73,39 @@ const QuestionStatus = ({ isOpen, closeModal }) => {
                                             </div>
                                             <span className="text-xs font-medium">Attempted</span>
                                         </div>
-                                        <div className="flex items-center gap-2">
-                                            <div className="min-w-[20px]">
-                                                <span className="w-3 h-3 block rounded-full border-2 border-gray-400"></span>
-                                            </div>
-                                            <span className="text-xs font-medium">Unseen</span>
-                                        </div>
+
                                     </div>
                                 </div>
-                                <div className=" mt-4">
+                                <div className=" my-4">
                                     <div className="flex items-center gap-4 ">
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex items-center gap-4">
                                             <span className="text-lg block text-primary-pink">{reactIcons.starFill}</span>
                                             <span className="text-sm font-medium">{totalReviewed}</span>
                                         </div>
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex items-center gap-4">
                                             <span className="w-3 h-3 block rounded-full bg-primary-gray"></span>
                                             <span className="text-sm font-medium">{totalQuestions - totalAnswered}</span>
                                         </div>
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex items-center gap-4">
                                             <span className="w-3 h-3  block rounded-full bg-primary-pink"></span>
                                             <span className="text-sm font-medium">{totalAnswered}</span>
                                         </div>
-                                        <div className="flex items-center gap-2">
-                                            <span className="w-3 h-3 block rounded-full border-2 border-gray-400"></span>
-                                            <span className="text-sm font-medium">{totalUnseen}</span>
-                                        </div>
+
                                     </div>
                                 </div>
-                                <div className="flex items-center flex-wrap gap-2 mt-4">
+                                <div className="flex items-center flex-wrap gap-8 mt-8">
                                     {questions?.map((question, index) => {
-                                        const isMarkedForReview = review?.findIndex((item) => item?._id === question?._id) >= 0
-                                        const isUnattempted = answered?.findIndex((item) => item?._id === question?._id) < 0 && index < currentQuestion
-                                        const isattempted = answered?.findIndex((item) => item?._id === question?._id) >= 0
+                                        const isMarkedForReview = question?.isReviewed
+                                        const isUnattempted = question?.yourAnswer === null && question?.isReviewed === false
+                                        const isattempted = question?.yourAnswer
                                         return (
                                             <div key={question._id} className="flex items-center gap-2 relative">
-                                                {isMarkedForReview && <span className="text-lg absolute top-[-4px] right-[-4px] block text-primary-pink">{reactIcons.starFill}</span>}
+                                                {isMarkedForReview && <span className="text-lg absolute top-[-10px] right-[-8px] block text-primary-pink">{reactIcons.starFill}</span>}
                                                 <div className={`w-8 h-8 flex-center text-base font-medium rounded-full border  border-primary-gray
                                                  ${isattempted ? 'bg-primary-pink border-none text-white' : ''}
                                                  ${isUnattempted ? 'bg-primary-gray text-white' : ''}
                                                   ${isMarkedForReview ? 'bg-primary-blue text-white border-0' : ''}
                                                 ${currentQuestion === index ? 'border-primary-blue text-primary-blue' : ''}
-                                               
-
-                                                
                                                 `}>{index + 1}</div>
                                             </div>
                                         )

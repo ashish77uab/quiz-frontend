@@ -6,9 +6,8 @@ import ToastMsg from "../../components/toast/ToastMsg";
 import { useNavigate, useParams } from "react-router-dom";
 import { ErrorMessage, FieldArray, Form, Formik } from "formik";
 import { createQuizQuestionSchema } from "../../utils/validation";
-import DeleteButton from "../../components/button/DeleteButton";
-import { reactIcons } from "../../utils/icons";
-import ActionButton from "../../components/button/ActionButton";
+import { Editor } from "@tinymce/tinymce-react";
+import EditorCustom from "../../components/forms/EditorCustom";
 const singleObject = {
     question: '',
     option1: '',
@@ -72,7 +71,6 @@ const AddQuizQuestion = () => {
             getQuizInfoById(quizId);
         }
     }, [quizId]);
-    // console.log(initialValue)
     return (
         <div className="py-4 px-4">
             <Formik
@@ -86,8 +84,9 @@ const AddQuizQuestion = () => {
                     errors,
                     handleChange,
                     handleBlur,
+                    setFieldValue
                 }) => {
-                    console.log(errors, 'errors')
+                    console.log(values, 'values')
                     return (
                         <Form className="w-full space-y-4 mt-4">
                             <FieldArray name="questions">
@@ -98,7 +97,15 @@ const AddQuizQuestion = () => {
                                                 <div className="flex gap-2 items-start mb-6">
                                                     <div className="grid grid-cols-2 gap-4 flex-grow" key={index}>
                                                         <div className="col-span-2 flex-1">
-                                                            <TextInput
+                                                            <EditorCustom
+                                                                onEditorChange={(newValue, editor) => {
+                                                                    setFieldValue(`questions.${index}.question`, newValue)
+                                                                }
+                                                                }
+                                                                value={question.question}
+                                                                initialValue={''}
+                                                            />
+                                                            {/* <TextArea
                                                                 label={`Question ${index + 1}`}
                                                                 name={`questions.${index}.question`}
                                                                 placeholder="Enter question"
@@ -106,7 +113,7 @@ const AddQuizQuestion = () => {
                                                                 onChange={handleChange}
                                                                 value={question.question}
                                                                 labelClassName='font-semibold'
-                                                            />
+                                                            /> */}
 
                                                         </div>
                                                         <div className="">
