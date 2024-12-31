@@ -4,9 +4,8 @@ import { createQuestion, getQuizInfo } from "../../api/api";
 import { toast } from "react-toastify";
 import ToastMsg from "../../components/toast/ToastMsg";
 import { useNavigate, useParams } from "react-router-dom";
-import { ErrorMessage, FieldArray, Form, Formik } from "formik";
+import { FieldArray, Form, Formik } from "formik";
 import { createQuizQuestionSchema } from "../../utils/validation";
-import { Editor } from "@tinymce/tinymce-react";
 import EditorCustom from "../../components/forms/EditorCustom";
 const singleObject = {
     question: '',
@@ -15,6 +14,7 @@ const singleObject = {
     option3: '',
     option4: '',
     answer: '',
+    writtenAnswer: ''
 }
 const initialState = {
     questions: [
@@ -37,7 +37,7 @@ const AddQuizQuestion = () => {
             const res = await createQuestion(tempForm);
             const { status, data } = res;
             if (status >= 200 && status < 300) {
-                toast.success(<ToastMsg title={`${quizId ? 'Updated' : 'Added'} Successfully`} />);
+                toast.success(<ToastMsg title={`Added Successfully`} />);
                 navigate(-1);
             } else {
                 toast.error(<ToastMsg title={data.message} />);
@@ -98,6 +98,7 @@ const AddQuizQuestion = () => {
                                                     <div className="grid grid-cols-2 gap-4 flex-grow" key={index}>
                                                         <div className="col-span-2 flex-1">
                                                             <EditorCustom
+                                                                label={`Question ${index + 1}`}
                                                                 onEditorChange={(newValue, editor) => {
                                                                     setFieldValue(`questions.${index}.question`, newValue)
                                                                 }
@@ -170,6 +171,17 @@ const AddQuizQuestion = () => {
                                                                 value={question.answer}
                                                             />
 
+                                                        </div>
+                                                        <div className="col-span-2">
+                                                            <EditorCustom
+                                                                label='Written Answer'
+                                                                onEditorChange={(newValue, editor) => {
+                                                                    setFieldValue(`questions.${index}.writtenAnswer`, newValue)
+                                                                }
+                                                                }
+                                                                value={question.writtenAnswer}
+                                                                initialValue={''}
+                                                            />
                                                         </div>
 
 

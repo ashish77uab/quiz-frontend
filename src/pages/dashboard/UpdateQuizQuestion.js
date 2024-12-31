@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import TextInput from "../../components/forms/TextInput";
-import { createQuestion, getQuizQuestionList, updateQuestion } from "../../api/api";
+import { getQuizQuestionList, updateQuestion } from "../../api/api";
 import { toast } from "react-toastify";
 import ToastMsg from "../../components/toast/ToastMsg";
 import { useNavigate, useParams } from "react-router-dom";
-import { ErrorMessage, FieldArray, Form, Formik, setIn } from "formik";
+import { FieldArray, Form, Formik } from "formik";
 import { createQuizQuestionSchema } from "../../utils/validation";
-import DeleteButton from "../../components/button/DeleteButton";
-import { reactIcons } from "../../utils/icons";
-import ActionButton from "../../components/button/ActionButton";
+
 import EditorCustom from "../../components/forms/EditorCustom";
 const singleObject = {
+    _id: "",
     question: '',
     option1: '',
     option2: '',
     option3: '',
     option4: '',
     answer: '',
+    writtenAnswer: ''
 }
 const initialState = {
     questions: [
@@ -53,17 +53,20 @@ const UpdateQuizQuestion = () => {
     };
 
     const getQuizQuestions = async (id) => {
+        setFetchLoading(true)
         try {
             const res = await getQuizQuestionList(id);
             const { status, data } = res;
             if (status >= 200 && status <= 300) {
                 const questions = data?.quizes?.map((item) => ({
+                    _id: item?._id,
                     question: item.question,
                     option1: item.option1,
                     option2: item.option2,
                     option3: item.option3,
                     option4: item.option4,
                     answer: item.answer,
+                    writtenAnswer: item.writtenAnswer,
                 }))
                 setInitialValue({ questions });
 
@@ -73,6 +76,8 @@ const UpdateQuizQuestion = () => {
         } catch (error) {
             console.log(error)
             toast.error(<ToastMsg title={error?.response?.data?.message} />);
+        } finally {
+            fetchLoading(false)
         }
     };
 
@@ -82,6 +87,7 @@ const UpdateQuizQuestion = () => {
             getQuizQuestions(quizId);
         }
     }, [quizId]);
+
 
     return (
         <div className="py-4 px-4">
@@ -108,6 +114,7 @@ const UpdateQuizQuestion = () => {
                                                     <div className="grid grid-cols-2 gap-4 flex-grow" key={index}>
                                                         <div className="col-span-2 flex-1">
                                                             <EditorCustom
+                                                                label={`Question ${index + 1}`}
                                                                 onEditorChange={(newValue, editor) => {
                                                                     setFieldValue(`questions.${index}.question`, newValue)
                                                                 }
@@ -171,6 +178,17 @@ const UpdateQuizQuestion = () => {
                                                                 value={question.answer}
                                                             />
 
+                                                        </div>
+                                                        <div className="col-span-2">
+                                                            <EditorCustom
+                                                                label='Written Answer'
+                                                                onEditorChange={(newValue, editor) => {
+                                                                    setFieldValue(`questions.${index}.writtenAnswer`, newValue)
+                                                                }
+                                                                }
+                                                                value={question.writtenAnswer}
+                                                                initialValue={question.writtenAnswer}
+                                                            />
                                                         </div>
 
 

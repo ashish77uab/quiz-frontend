@@ -188,6 +188,8 @@ export const createQuizQuestionSchema = (length) => {
                     .required('Option 3 is required'),
                 option4: yup.string()
                     .required('Option 4 is required'),
+                writtenAnswer: yup.string()
+                    .required('Written answer is required'),
                 answer: yup.string()
                     .oneOf(['A', 'B', 'C', 'D'], 'Answer must be one of A, B, C, or D')
                     .required('Answer is required'),

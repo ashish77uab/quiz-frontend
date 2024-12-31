@@ -62,6 +62,7 @@ function App() {
             <Route path="play-quiz/:quizId" element={<QuizPlay />} />
             <Route path="/quiz/result/:resultId/:quizId" element={<QuizResult />} />
             <Route path="/quiz-join/:quizId" element={<QuizJoin />} />
+            <Route path="//quiz/answer" element={<QuizJoin />} />
           </Route>
           <Route path="/dashboard" element={<ProtectedRoutes><DashboardLayout /></ProtectedRoutes>}>
             <Route index element={<Dashboard />} />

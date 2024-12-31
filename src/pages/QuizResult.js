@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ToastMsg from "../components/toast/ToastMsg";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { quizSingleResult } from "../api/api";
 import { reactIcons } from "../utils/icons";
+import DangerouslySetHtml from "./components/DangerouslySetHtml";
 
 const Tab = {
   Analysis: 'Analysis',
@@ -102,11 +103,23 @@ const QuizResult = () => {
       {selectedTab === Tab.Solution && <>
         <div className="space-y-2 py-4 px-4">
           {questionAnswer?.map((item, index) => {
-            return <div key={index} className="p-3 rounded-md bg-white border-c ">
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-1"></div>
+            return (
+              <div key={index} className="p-3 rounded-md bg-white border-c ">
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className={`w-6 h-6 rounded-full flex-center  text-xs ${item?.isCorrect !== null ? item?.isCorrect ? 'text-white bg-green-500' : 'text-white bg-red-500' : 'text-black bg-gray-200'}`} >{item?.questionNumber}</div>
+                    {item?.questionTimer && <div className="flex items-center gap-2  text-gray-400">
+                      <div className="text-xl">{reactIcons.watch}</div>
+                      <div className="text-xs" >{item?.questionTimer}</div>
+                    </div>}
+                  </div>
+                  <Link to={'/quiz/answer'} state={{ answer: item }} className="text-xs text-primary-blue font-medium">View Answer</Link>
+                </div>
+                <div className="mt-2 text-xs line-clamp-3" >
+                  <DangerouslySetHtml customClassName='[&_p]:text-xs' html={item?.question?.question} />
+                </div>
               </div>
-            </div>
+            )
           })}
         </div>
       </>}

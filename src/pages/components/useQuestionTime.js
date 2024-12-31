@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const useQuestionTime = () => {
-    const [questionTime, setQuestionTime] = useState(0); // Question timer (0 seconds)
+const useQuestionTime = (questionTimeDefault = 0) => {
+    const [questionTime, setQuestionTime] = useState(questionTimeDefault); // Question timer (0 seconds)
 
     useEffect(() => {
         // Question Timer
@@ -23,7 +23,8 @@ const useQuestionTime = () => {
     const questionTimer = formatTime(questionTime)
 
     return {
-        questionTimer
+        questionTimer,
+        questionTime
     }
 };
 
