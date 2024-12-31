@@ -5,6 +5,7 @@ import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
 import QuizPlay from "./QuizPlay";
 import QuizResult from "./QuizResult";
+import SolutionPage from "./SolutionPage";
 import QuizJoin from "./QuizJoin";
 import Home from "./Home";
 import Dashboard from "./dashboard/Dashboard";
@@ -40,5 +41,6 @@ export {
   AddMatch,
   AddPrize,
   UserDetails,
+  SolutionPage
 
 };

@@ -5,6 +5,8 @@ const quizSlice = createSlice({
   initialState: {
     questions: [],
     currentQuestion: 0,
+    singleResult: {},
+    resultCurrentQuestionNum: 0,
 
   },
   reducers: {
@@ -14,6 +16,12 @@ const quizSlice = createSlice({
     setCurrentQuestion: (state, action) => {
       state.currentQuestion = action.payload;
     },
+    setSingleResult: (state, action) => {
+      state.singleResult = action.payload;
+    },
+    setResultCurrentQuestion: (state, action) => {
+      state.resultCurrentQuestionNum = action.payload;
+    },
   },
   extraReducers: {},
 });
@@ -21,6 +29,8 @@ const quizSlice = createSlice({
 export const {
   setQuestions,
   setCurrentQuestion,
+  setSingleResult,
+  setResultCurrentQuestion
 } = quizSlice.actions;
 
 export default quizSlice.reducer;

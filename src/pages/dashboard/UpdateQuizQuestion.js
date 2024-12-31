@@ -77,7 +77,7 @@ const UpdateQuizQuestion = () => {
             console.log(error)
             toast.error(<ToastMsg title={error?.response?.data?.message} />);
         } finally {
-            fetchLoading(false)
+            setFetchLoading(false)
         }
     };
 

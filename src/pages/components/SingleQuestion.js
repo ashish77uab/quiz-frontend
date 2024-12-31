@@ -47,7 +47,7 @@ const Option = ({
     )
 
 }
-const SingleQuestion = ({ question, questions, isLastQuestion, timeToReturn, quizId, currentQuestion, dispatch, isIncludedReview, quizInfo, currentQuestionToWork }) => {
+const SingleQuestion = ({ question, resetState, questions, isLastQuestion, timeToReturn, quizId, currentQuestion, dispatch, isIncludedReview, quizInfo, currentQuestionToWork }) => {
 
     const [isConfirmedOpen, setIsConfirmedOpen] = useState(false)
     const [updateLoading, setUpdateLoading] = useState(false)
@@ -114,7 +114,7 @@ const SingleQuestion = ({ question, questions, isLastQuestion, timeToReturn, qui
             const { status, data } = res;
             if (status >= 200 && status <= 300) {
                 navigate(`/quiz/result/${data?._id}/${quizId}`, { replace: true })
-                dispatch(setCurrentQuestion(0))
+                resetState()
             } else {
                 toast.error(<ToastMsg title={data.message} />);
             }

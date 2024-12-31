@@ -19,7 +19,8 @@ import {
   QuizResult,
   QuizJoin,
   Login,
-  Register
+  Register,
+  SolutionPage
 } from "./pages";
 import { getUser } from "./api/api";
 import { useDispatch, useSelector } from "react-redux";
@@ -62,7 +63,7 @@ function App() {
             <Route path="play-quiz/:quizId" element={<QuizPlay />} />
             <Route path="/quiz/result/:resultId/:quizId" element={<QuizResult />} />
             <Route path="/quiz-join/:quizId" element={<QuizJoin />} />
-            <Route path="//quiz/answer" element={<QuizJoin />} />
+            <Route path="//quiz/answer/:questionNumber/:quizId" element={<SolutionPage />} />
           </Route>
           <Route path="/dashboard" element={<ProtectedRoutes><DashboardLayout /></ProtectedRoutes>}>
             <Route index element={<Dashboard />} />

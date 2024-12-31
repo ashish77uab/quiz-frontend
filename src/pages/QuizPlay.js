@@ -4,10 +4,10 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import { getQuizInfo, getQuizQuestionList } from "../api/api";
 import { useDispatch, useSelector } from "react-redux";
-import { setQuestions } from "../redux/features/quizSlice";
 import SingleQuestion from "./components/SingleQuestion";
 import useCountdownTimer from "./components/useCountdownTimer";
 import { reactIcons } from "../utils/icons";
+import { setCurrentQuestion, setQuestions } from "../redux/features/quizSlice";
 
 const QuizPlay = () => {
 
@@ -44,7 +44,10 @@ const QuizPlay = () => {
   };
 
 
-
+  const resetState = () => {
+    dispatch(setQuestions([]))
+    dispatch(setCurrentQuestion(0))
+  }
   useEffect(() => {
     getAllQuizQuestion(quizId);
   }, [quizId]);
@@ -66,6 +69,10 @@ const QuizPlay = () => {
     if (quizId) {
       getQuizInfoById(quizId);
     }
+
+    return () => {
+      resetState()
+    }
   }, [quizId]);
 
 
@@ -83,6 +90,7 @@ const QuizPlay = () => {
         </div>
         <div className=" h-full">
           <SingleQuestion
+            resetState={resetState}
             isLastQuestion={isLastQuestion}
             timeToReturn={timeToReturn}
             questions={questions}
