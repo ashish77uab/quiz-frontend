@@ -15,6 +15,7 @@ const initialState = {
   questionCount: '',
   rightMark: '',
   negativeMark: '',
+  time: '',
 };
 const CreateAndUpdateQuiz = ({ isOpen, quiz, closeModal, fetchData }) => {
   const [loading, setLoading] = useState(false)
@@ -46,6 +47,7 @@ const CreateAndUpdateQuiz = ({ isOpen, quiz, closeModal, fetchData }) => {
       questionCount: quiz?.questionCount,
       rightMark: quiz?.rightMark,
       negativeMark: quiz?.negativeMark,
+      time: quiz?.time,
     })
   }, [quiz])
 
@@ -124,18 +126,25 @@ const CreateAndUpdateQuiz = ({ isOpen, quiz, closeModal, fetchData }) => {
                           value={values.rightMark}
 
                         />
-                        <>
-                          <TextInput
-                            type='number'
-                            label={"Negative marks of the question"}
-                            placeholder="eg. 1"
-                            name="negativeMark"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.negativeMark}
-                          />
+                        <TextInput
+                          type='number'
+                          label={"Negative marks of the question"}
+                          placeholder="eg. 1"
+                          name="negativeMark"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.negativeMark}
+                        />
+                        <TextInput
+                          type='number'
+                          label={"Time of the quiz (in mins) "}
+                          placeholder="eg. 25"
+                          name="time"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.time}
+                        />
 
-                        </>
 
                         <footer className="py-4  font-medium">
                           <button type="submit" className="btn-outline-primary">

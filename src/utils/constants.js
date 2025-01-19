@@ -1,57 +1,6 @@
 import { reactIcons } from "./icons";
-export const navbarLinks = [
-  {
-    path: "/",
-    title: "Home",
-  },
-  {
-    path: "/strategy",
-    title: "Strategy",
-  },
-  {
-    path: "/about",
-    title: "About",
-  },
-  {
-    path: "/pricing",
-    title: "Pricing",
-  },
-  {
-    path: "/contact",
-    title: "Contact Us",
-  },
 
-]
-export const userMenuLinks = [
-  {
-    path: "/user/dashboard",
-    title: "Dashboard",
-    icon: reactIcons.home
 
-  },
-  {
-    path: "/user/markets",
-    title: "Markets",
-    icon: reactIcons.chart
-  },
-  {
-    path: "/user/net-position",
-    title: "Net Position",
-    icon: reactIcons.giChart
-  },
-
-  {
-    path: "/user/portfolio",
-    title: "Portfolio",
-    icon: reactIcons.list
-  },
-  {
-    path: "/user/funds",
-    title: "Funds",
-    icon: reactIcons.money
-  },
-]
-export const pathsRequireToggle = navbarLinks?.filter(item => item !== '/')?.map(item => item?.path)
 
 export const links = [
   {
@@ -69,11 +18,7 @@ export const links = [
     title: "Quiz List",
     icon: reactIcons.list,
   },
-  {
-    path: "transactions",
-    title: "Transactions",
-    icon: reactIcons.list,
-  },
+
 
 
 

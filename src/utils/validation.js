@@ -172,6 +172,9 @@ export const createQuizValidationSchema = yup.object().shape({
     negativeMark: yup
         .number()
         .required("Field is required"),
+    time: yup
+        .number()
+        .required("Field is required"),
 
 });
 export const createQuizQuestionSchema = (length) => {

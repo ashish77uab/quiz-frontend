@@ -68,7 +68,6 @@ const AllUsers = () => {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Mobile</th>
-                  <th>Balance</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -81,7 +80,6 @@ const AllUsers = () => {
                       <td>{user?.fullName}</td>
                       <td><div>{user?.email}</div></td>
                       <td><div>{user?.phone}</div></td>
-                      <td><b className={`${user?.wallet?.amount < 0 ? 'text-red-500' : ''}`}>Rs. {numberWithCommas(user?.wallet?.amount?.toFixed(2))}</b></td>
                       <td>
                         <div className="flex justify-center gap-2">
                           <button className={'btn-primary btn-sm'} onClick={() => {
@@ -89,16 +87,7 @@ const AllUsers = () => {
                           }}>
                             View Details
                           </button>
-                          <button className={'btn-outline-primary btn-sm'} onClick={() => {
-                            navigate(`/dashboard/user-stocks/${user?._id}`)
-                          }}>
-                            View Stocks
-                          </button>
-                          <button className={'btn-outline-primary btn-sm'} onClick={() => {
-                            navigate(`/dashboard/user-holdings/${user?._id}`)
-                          }}>
-                            View Holdings
-                          </button>
+
                         </div>
                       </td>
                     </tr>

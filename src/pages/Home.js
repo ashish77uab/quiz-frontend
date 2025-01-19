@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { getAllQuizList } from "../api/api";
 import { getUserToken } from "../utils/constants";
+import BeatLoader from "react-spinners/BeatLoader";
+import Spinner from "../components/loaders/Spinner";
 
 
 const Home = () => {
@@ -41,6 +43,11 @@ const Home = () => {
       <header>
         <h6 className="heading-6 mb-1"> All Tests</h6>
       </header>
+      {
+        fetchLoading && (
+          <Spinner />
+        )
+      }
       <div className="space-y-2 mb-6">
         {quizes?.quizes?.map((quiz) => {
           return (
@@ -49,7 +56,7 @@ const Home = () => {
                 <div className="px-3 py-1 bg-green-500 mb-1 text-white font-bold inline-block rounded-md text-xs">FREE</div>
                 <p className="font-semibold text-primary-grayDark mb-1"> {quiz?.name}</p>
                 <div className="flex items-center gap-1 justify-between">
-                  <div className="text-xs  text-muted"><span>{quiz?.questionCount} Qs .</span>  <span>25 mins.</span> <span>{quiz?.rightMark * quiz?.questionCount} Marks</span></div>
+                  <div className="text-xs  text-muted"><span>{quiz?.questionCount} Qs .</span>  <span>{quiz?.time} mins.</span> <span>{quiz?.rightMark * quiz?.questionCount} Marks</span></div>
                   <div className="text-primary-blue text-xs">Join Test</div>
                 </div>
               </div>
@@ -63,10 +70,6 @@ const Home = () => {
 
         )}
       </div>
-
-
-
-
     </section>
   );
 };

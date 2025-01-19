@@ -99,6 +99,7 @@ const AllQuiz = () => {
                   <th>Total Questions</th>
                   <th>Right answer mark</th>
                   <th>Negative answer mark</th>
+                  <th>Time</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -112,6 +113,7 @@ const AllQuiz = () => {
                       <td><div>{quiz?.questionCount}</div></td>
                       <td><div>{quiz?.rightMark}</div></td>
                       <td><div>{quiz?.negativeMark}</div></td>
+                      <td><div className="font-semibold">{quiz?.time} mins</div></td>
                       <td>
                         <div className="flex justify-end gap-2">
                           {quiz?.isAdded ? <button onClick={() => navigate(`/dashboard/quiz/update-question/${quiz?._id}`)} className="btn-primary">

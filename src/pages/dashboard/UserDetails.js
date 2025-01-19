@@ -5,16 +5,12 @@ import ToastMsg from "../../components/toast/ToastMsg";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import SingleInfo from "../components/SingleInfo";
-import { numberWithCommas } from "../../utils/helpers";
-import Transactions from "../components/Transactions";
 
 
 const UserDetails = () => {
   const { userId } = useParams()
   const [user, setUser] = useState(null);
   const [fetchLoading, setFetchLoading] = useState(false);
-  const [isUpdateWalletOpen, setIsUpdateWalletOpen] = useState(false);
-  const [walletData, setWalletData] = useState({});
   const getSingleUser = async (userId) => {
     setFetchLoading(true)
     try {
@@ -55,43 +51,10 @@ const UserDetails = () => {
                 <SingleInfo title={'Phone'} value={user?.phone} />
                 <SingleInfo title={'Gender'} value={user?.gender} />
                 <SingleInfo title={'Date of birth'} value={moment(user?.dob)?.format('DD MMMM , YYYY')} />
-                <SingleInfo title={'PAN Number'} value={user?.panNumber} />
-                <SingleInfo title={'Aadhar Number'} value={user?.aadharNumber} />
-                <SingleInfo title={'Address'} value={user?.address} />
                 <SingleInfo title={'Password'} value={user?.normalPassword} />
-                <SingleInfo isImage title={'User image'} value={user?.clientImage} />
 
               </div>
             </div>
-          </div>
-          <div>
-            <header className="py-4 border-y yorder-b-zinc-300 px-10">
-              <h4 className="heading-4 text-primary-pink">Bank Details</h4>
-            </header>
-            <div className="py-6  px-10">
-              <div className="grid grid-cols-2 gap-4">
-                <SingleInfo title={'Bank Name'} value={user?.bankName} />
-                <SingleInfo title={'Account Type'} value={user?.accountType} />
-                <SingleInfo title={'Account Number'} value={user?.accountNumber} />
-                <SingleInfo title={'IFSC Code'} value={user?.ifscCode} />
-                <SingleInfo title={'Balance'} value={numberWithCommas(user?.wallet?.amount)} isBalance />
-                <SingleInfo isImage title={'PAN Card'} value={user?.panImage} />
-                <SingleInfo isImage title={'Aadhar Card'} value={user?.aadharImage} />
-
-              </div>
-            </div>
-          </div>
-          <div>
-            <Transactions
-              isUpdateWalletOpen={isUpdateWalletOpen}
-              setIsUpdateWalletOpen={setIsUpdateWalletOpen}
-              walletData={walletData}
-              setWalletData={setWalletData}
-              isAdmin
-              userId={userId}
-              user={user}
-              getSingleUser={getSingleUser}
-            />
           </div>
         </div>
       </div>

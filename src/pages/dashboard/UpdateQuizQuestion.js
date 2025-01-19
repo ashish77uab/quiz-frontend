@@ -91,6 +91,9 @@ const UpdateQuizQuestion = () => {
 
     return (
         <div className="py-4 px-4">
+            <div>
+                <h2 className="text-xl font-bold text-gray-800">Update Question</h2>
+            </div>
             <Formik
                 enableReinitialize
                 initialValues={initialValue}

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
-const useCountdownTimer = () => {
-    const [time, setTime] = useState(25 * 60); // Initial time in seconds (25 minutes)
+const useCountdownTimer = ({ timer }) => {
+
+    const [time, setTime] = useState(timer * 60); // Initial time in seconds (25 minutes)
 
     useEffect(() => {
         const timerId = setInterval(() => {
@@ -15,7 +16,7 @@ const useCountdownTimer = () => {
         }, 1000);
 
         return () => clearInterval(timerId); // Cleanup on component unmount
-    }, []);
+    }, [timer]);
 
     // Format time as MM:SS
     const formatTime = (seconds) => {
@@ -27,7 +28,8 @@ const useCountdownTimer = () => {
     const timeToReturn = formatTime(time)
 
     return {
-        timeToReturn
+        timeToReturn,
+        time
     }
 };
 

@@ -25,7 +25,7 @@ const Dashboard = () => {
         }
     }
     useEffect(() => {
-        fetchDashboardData()
+        // fetchDashboardData()
     }, [])
 
 
@@ -35,7 +35,10 @@ const Dashboard = () => {
             <header className="mb-4 flex items-center justify-between">
                 <h3 className="heading-3">Dashboard</h3>
             </header>
-            <div className="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mb-10">
+            <div className="heading-4 py-4 text-center">
+                Coming Soon
+            </div>
+            {/* <div className="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-4 mb-10">
                 <div className="bg-white border border-zinc-100 rounded-md p-6 shadow-card">
                     <h5 className="heading-5">Total Users</h5>
                     <p className="font-semibold text-xl text-primary-pink">{numberWithCommas(dashboardData?.totalUsers)}</p>
@@ -65,7 +68,7 @@ const Dashboard = () => {
                     <p className="font-semibold text-xl text-primary-pink">Rs. {numberWithCommas(dashboardData?.highestWithdrawalAmount)}</p>
                 </div>
 
-            </div>
+            </div> */}
 
         </div>
     );

@@ -12,7 +12,8 @@ const QuestionStatus = ({ isOpen, closeModal }) => {
         totalReviewed,
         totalAnswered,
         questions,
-        currentQuestion
+        currentQuestion,
+        handleQuestionStatusClick
     } = useQuestionStatus()
     return (
         <Transition appear show={isOpen} as={Fragment}>
@@ -51,47 +52,35 @@ const QuestionStatus = ({ isOpen, closeModal }) => {
                                     </Link>
                                     <div ref={dialogRef} className=""></div>
 
-                                    <div onClick={closeModal} className=" w-[32px] h-[32px] rounded-full flex-center text-2xl text-white bg-primary-pink ">{reactIcons.close}</div>
+                                    <div onClick={closeModal} className=" w-[32px] cursor-pointer h-[32px] rounded-full flex-center text-2xl text-white bg-primary-pink ">{reactIcons.close}</div>
                                 </div>
-                                <div className="flex flex-grow flex-col gap-1 mt-4">
-                                    <div className="grid grid-cols-2 gap-4 pb-4 border-b border-b-gray-200">
-                                        <div className="flex items-center gap-2">
-                                            <div className="min-w-[20px]">
-                                                <span className="text-lg block text-primary-pink">{reactIcons.starFill}</span>
-                                            </div>
-                                            <span className="text-xs font-medium">Marked for review</span>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <div className="min-w-[20px]">
-                                                <span className="w-3 h-3 block rounded-full bg-primary-gray"></span>
-                                            </div>
-                                            <span className="text-xs font-medium">Unattempted</span>
-                                        </div>
-                                        <div className="flex items-center gap-2">
-                                            <div className="min-w-[20px]">
-                                                <span className="w-3 h-3 ml-1 block rounded-full bg-primary-pink"></span>
-                                            </div>
-                                            <span className="text-xs font-medium">Attempted</span>
-                                        </div>
 
-                                    </div>
-                                </div>
                                 <div className=" my-4">
-                                    <div className="flex items-center gap-4 ">
-                                        <div className="flex items-center gap-4">
-                                            <span className="text-lg block text-primary-pink">{reactIcons.starFill}</span>
-                                            <span className="text-sm font-medium">{totalReviewed}</span>
-                                        </div>
-                                        <div className="flex items-center gap-4">
-                                            <span className="w-3 h-3 block rounded-full bg-primary-gray"></span>
-                                            <span className="text-sm font-medium">{totalQuestions - totalAnswered}</span>
-                                        </div>
-                                        <div className="flex items-center gap-4">
-                                            <span className="w-3 h-3  block rounded-full bg-primary-pink"></span>
-                                            <span className="text-sm font-medium">{totalAnswered}</span>
-                                        </div>
+                                    <ul className="space-y-2 gap-4 divide-y divide-slate-200 ">
 
-                                    </div>
+                                        <li className="py-3 flex items-center gap-4 justify-between">
+                                            <div className="flex items-center gap-4 ">
+                                                <span className="text-lg  ">{reactIcons.starFill}</span>
+                                                <span className="text-base font-medium text-gray-500 ">Marked</span>
+                                            </div>
+                                            <span className="text-lg font-semibold ">{totalReviewed}</span>
+                                        </li>
+                                        <li className="py-3 flex items-center gap-4 justify-between">
+                                            <div className="flex items-center gap-4 ">
+                                                <span className="w-3 h-3 block rounded-full bg-primary-gray"></span>
+                                                <span className="text-base font-medium text-gray-500 ">UnAttempted</span>
+                                            </div>
+                                            <span className="text-lg font-semibold ">{totalQuestions - totalAnswered}</span>
+                                        </li>
+                                        <li className="py-3 flex items-center gap-4 justify-between">
+                                            <div className="flex items-center gap-4 ">
+                                                <span className="w-3 h-3  block rounded-full bg-primary-pink"></span>
+                                                <span className="text-base font-medium text-gray-500 ">Attempted</span>
+                                            </div>
+                                            <span className="text-lg font-semibold ">{totalAnswered}</span>
+                                        </li>
+                                    </ul>
+
                                 </div>
                                 <div className="flex items-center flex-wrap gap-8 mt-8">
                                     {questions?.map((question, index) => {
@@ -99,7 +88,11 @@ const QuestionStatus = ({ isOpen, closeModal }) => {
                                         const isUnattempted = question?.yourAnswer === null && question?.isReviewed === false
                                         const isattempted = question?.yourAnswer
                                         return (
-                                            <div key={question._id} className="flex items-center gap-2 relative">
+                                            <div onClick={() => {
+                                                handleQuestionStatusClick(index)
+                                                closeModal()
+                                            }
+                                            } key={question._id} className="flex cursor-pointer  items-center gap-2 relative">
                                                 {isMarkedForReview && <span className="text-lg absolute top-[-10px] right-[-8px] block text-primary-pink">{reactIcons.starFill}</span>}
                                                 <div className={`w-8 h-8 flex-center text-base font-medium rounded-full border  border-primary-gray
                                                  ${isattempted ? 'bg-primary-pink border-none text-white' : ''}

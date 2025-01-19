@@ -23,6 +23,7 @@ const initialState = {
 
 };
 const AddQuizQuestion = () => {
+    const [isMathQuestion, setIsMathQuestion] = useState(false)
     const { quizId } = useParams();
     const navigate = useNavigate();
     const [initialValue, setInitialValue] = useState(initialState);
@@ -73,6 +74,10 @@ const AddQuizQuestion = () => {
     }, [quizId]);
     return (
         <div className="py-4 px-4">
+            <div className="flex justify-between gap-4">
+                <h2 className="text-xl font-bold text-gray-800">Add Question</h2>
+
+            </div>
             <Formik
                 enableReinitialize
                 initialValues={initialValue}
