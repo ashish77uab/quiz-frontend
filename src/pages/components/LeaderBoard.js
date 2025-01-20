@@ -70,12 +70,12 @@ const LeaderBoard = ({ quizId, selectedTab }) => {
                                                 <div className={`  text-sm font-semibold  text-primary-gray flex-center`}>
                                                     {result?.rank}
                                                 </div>
-                                                <div className={`w-10 h-10 rounded-full ${returnClassColor(index)} text-white flex-center`}>
+                                                <div className={`w-8 h-8 rounded-full ${returnClassColor(index)} text-white flex-center`}>
                                                     {result?.userDetails?.fullName?.[0]}
                                                 </div>
                                             </div>
                                             <div className='flex-grow'>
-                                                <div className='font-medium'> {result?.userDetails?.fullName}</div>
+                                                <div className='font-medium text-sm'> {result?.userDetails?.fullName}</div>
 
 
                                             </div>

@@ -58,7 +58,7 @@ const QuizResult = () => {
             <div role="button" onClick={() => {
               setSelectedTab(item)
               addParam('tab', item, searchParams, setSearchParams)
-            }} className={`relative font-semibold py-4 flex-1 text-center ${item === selectedTab && ' text-primary-pink '}`}>
+            }} className={`relative font-semibold py-5 flex-1 text-center ${item === selectedTab && ' text-primary-pink '}`}>
               {item}
               {selectedTab === item && <div className="absolute bottom-0 w-full h-[2px] bg-primary-pink"></div>}
             </div>
