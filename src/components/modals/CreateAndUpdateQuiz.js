@@ -82,7 +82,7 @@ const CreateAndUpdateQuiz = ({ isOpen, quiz, closeModal, fetchData }) => {
                 className="w-full max-w-xl transform overflow-hidden rounded-xl bg-white p-6 text-left align-middle shadow-xl transition-all"
               >
                 <Dialog.Title as="h4" className="heading-4 text-center">
-                  {quiz ? 'Create' : 'Update'} Quiz
+                  {!quiz ? 'Create' : 'Update'} Quiz
                 </Dialog.Title>
                 <Formik
                   enableReinitialize
@@ -148,7 +148,7 @@ const CreateAndUpdateQuiz = ({ isOpen, quiz, closeModal, fetchData }) => {
 
                         <footer className="py-4  font-medium">
                           <button type="submit" className="btn-outline-primary">
-                            {loading ? 'Loading...' : 'Create'}
+                            {loading ? 'Loading...' : !quiz ? 'Create' : 'Update'}
                           </button>
                         </footer>
                       </Form>

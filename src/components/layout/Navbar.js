@@ -1,14 +1,13 @@
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { reactIcons } from "../../utils/icons";
-import { setLogout, setModalToggle, } from "../../redux/features/authSlice";
+import { setLogout } from "../../redux/features/authSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { getUserToken, navbarLinks } from "../../utils/constants";
+import { getUserToken } from "../../utils/constants";
 
 
 import React from 'react'
-import AuthButton from "../../pages/components/AuthButton";
 import { useScrollToTop } from "../../hooks/useScrollToTop";
 
 
@@ -24,10 +23,6 @@ const Navbar = () => {
     navigate("/");
     window.location.reload()
   };
-  const handleAuthToggle = (obj) => {
-    dispatch(setModalToggle(obj))
-  }
-
   const isLoggedIn = getUserToken()
   return (
     <>
@@ -75,19 +70,6 @@ const Navbar = () => {
                             <p className="text-muted text-sm font-medium">{user?.email}</p>
 
                           </div>
-                          {/* <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                onClick={() => navigate(`/profile/${user._id}`)}
-                                className={`${active
-                                  ? "bg-primary-pink text-white"
-                                  : "text-gray-900"
-                                  } group flex w-full items-center rounded-md px-6 py-2 text-base`}
-                              >
-                                Profile
-                              </button>
-                            )}
-                          </Menu.Item> */}
                           {user?.role === 'Admin' && <Menu.Item>
                             {({ active }) => (
                               <button
@@ -121,32 +103,6 @@ const Navbar = () => {
                   </Menu>
                 </div>
               )}
-              {!isLoggedIn && <div className="lg:hidden block">
-                <button
-                  onClick={() => {
-                    handleAuthToggle({ key: 'isLoginOpen', value: true })
-                  }}
-                  className='btn-primary px-6 min-w-fit'
-                >
-                  Log In
-                </button>
-              </div>}
-              <div className="lg:block hidden">
-                {!isLoggedIn && (
-                  <AuthButton
-                    handleSignUpClick={() => {
-                      handleAuthToggle({ key: 'isSignUpOpen', value: true })
-                    }}
-                    handleSignInClick={() => {
-                      handleAuthToggle({ key: 'isLoginOpen', value: true })
-                    }}
-                    toggle={toggle}
-                  />
-                )}
-              </div>
-              <div onClick={() => handleAuthToggle({ key: 'isQuestionStatusOpen', value: true })} className={`w-10 h-10 flex-center text-3xl cursor-pointer `}>
-                {reactIcons.menu}
-              </div>
             </div>
           </div>
         </div>

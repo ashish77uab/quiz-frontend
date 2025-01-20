@@ -6,6 +6,7 @@ import { getAllQuizList } from "../api/api";
 import { getUserToken } from "../utils/constants";
 import BeatLoader from "react-spinners/BeatLoader";
 import Spinner from "../components/loaders/Spinner";
+import Navbar from "../components/layout/Navbar";
 
 
 const Home = () => {
@@ -39,38 +40,42 @@ const Home = () => {
 
 
   return (
-    <section className="flex-1 px-4 py-4">
-      <header>
-        <h6 className="heading-6 mb-1"> All Tests</h6>
-      </header>
-      {
-        fetchLoading && (
-          <Spinner />
-        )
-      }
-      <div className="space-y-2 mb-6">
-        {quizes?.quizes?.map((quiz) => {
-          return (
-            <Link key={quiz?._id} to={`/quiz-join/${quiz?._id}`} className="border-c  block rounded-md shadow-card bg-white cursor-pointer">
-              <div className="py-3 px-3">
-                <div className="px-3 py-1 bg-green-500 mb-1 text-white font-bold inline-block rounded-md text-xs">FREE</div>
-                <p className="font-semibold text-primary-grayDark mb-1"> {quiz?.name}</p>
-                <div className="flex items-center gap-1 justify-between">
-                  <div className="text-xs  text-muted"><span>{quiz?.questionCount} Qs .</span>  <span>{quiz?.time} mins.</span> <span>{quiz?.rightMark * quiz?.questionCount} Marks</span></div>
-                  <div className="text-primary-blue text-xs">Join Test</div>
-                </div>
-              </div>
-              <div className="py-2 px-3 bg-blue-50/50">
-                <div className="text-primary-blue text-xs">English</div>
-              </div>
-
-            </Link>
+    <>
+      <Navbar />
+      <section className="flex-1 px-4 py-4">
+        <header>
+          <h6 className="heading-6 mb-1"> All Tests</h6>
+        </header>
+        {
+          fetchLoading && (
+            <Spinner />
           )
         }
+        <div className="space-y-2 mb-6">
+          {quizes?.quizes?.map((quiz) => {
+            return (
+              <Link key={quiz?._id} to={`/quiz-join/${quiz?._id}`} className="border-c  block rounded-md shadow-card bg-white cursor-pointer">
+                <div className="py-3 px-3">
+                  <div className="px-3 py-1 bg-green-500 mb-1 text-white font-bold inline-block rounded-md text-xs">FREE</div>
+                  <p className="font-semibold text-primary-grayDark mb-1"> {quiz?.name}</p>
+                  <div className="flex items-center gap-1 justify-between">
+                    <div className="text-xs  text-muted"><span>{quiz?.questionCount} Qs .</span>  <span>{quiz?.time} mins.</span> <span>{quiz?.rightMark * quiz?.questionCount} Marks</span></div>
+                    <div className="text-primary-blue text-xs">Join Test</div>
+                  </div>
+                </div>
+                <div className="py-2 px-3 bg-blue-50/50">
+                  <div className="text-primary-blue text-xs">English</div>
+                </div>
 
-        )}
-      </div>
-    </section>
+              </Link>
+            )
+          }
+
+          )}
+        </div>
+      </section>
+
+    </>
   );
 };
 

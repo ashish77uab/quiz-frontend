@@ -6,6 +6,7 @@ import { getQuizInfo } from "../api/api";
 import { useDispatch, useSelector } from "react-redux";
 import SingleQuestionSolution from "./components/SingleQuestionSolution";
 import { setResultCurrentQuestion } from "../redux/features/quizSlice";
+import TopBar from "../components/layout/TopBar";
 
 const SolutionPage = () => {
   const [quizInfo, setQuizInfo] = useState({});
@@ -52,6 +53,7 @@ const SolutionPage = () => {
 
   return (
     <>
+      <TopBar />
       <section className=" pb-28">
 
         <div className=" h-full">

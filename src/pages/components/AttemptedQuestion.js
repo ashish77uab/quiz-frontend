@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import InfiniteScrollComponent from '../../components/InfiniteScrollComponent';
 
 const AttemptedQuestion = ({ quizId }) => {
-    const limit = 4;
+    const limit = 10;
     const [attemptedResult, setAttemptedResult] = useState({});
     const [page, setPage] = useState(1)
     const loadMoreData = () => {
@@ -63,7 +63,7 @@ const AttemptedQuestion = ({ quizId }) => {
                                                     <span>{result?.totalMarksGot}/{result?.quizDetails?.rightMark * result?.quizDetails?.questionCount} Marks.</span>
                                                     <span className="ml-1">{result?.rank}/{attemptedResult?.totalParticipants} Rank</span>
                                                 </div>
-                                                <Link to={`/quiz/result/${result?._id}/${result?.quizDetails?._id}`} className="text-primary-blue text-xs">View Result</Link>
+                                                <Link to={`/quiz/result/${result?._id}/${result?.quizDetails?._id}?isAttempted=true`} className="text-primary-blue text-xs">View Result</Link>
                                             </div>
                                         </div>
                                         <div className="py-2 px-3 bg-blue-50/50">

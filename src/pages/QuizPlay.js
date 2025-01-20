@@ -8,6 +8,8 @@ import { setCurrentQuestion, setQuestions } from "../redux/features/quizSlice";
 import RenderQuizPlay from "./components/RenderQuizPlay";
 import Spinner from "../components/loaders/Spinner";
 import ExitQuizConfirmation from "../components/modals/ExitQuizConfirmation";
+import { setModalToggle } from "../redux/features/authSlice";
+import { reactIcons } from "../utils/icons";
 const QuizPlay = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -124,10 +126,27 @@ const QuizPlay = () => {
     window.history.pushState(null, '', window.location.href); // Stay on the same page
   }
 
-
+  const handleToggle = (obj) => {
+    dispatch(setModalToggle(obj))
+  }
 
   return (
     <>
+      <div className={`flex items-center min-h-[65px]  shadow-navbar border-b border-b-zinc-100 bg-transparent transition-all duration-200 py-[10px] sticky top-0 left-0  bg w-full z-[50] bg-white`}>
+        <div className="px-4 w-full">
+          <div className="flex items-center justify-between">
+            <div onClick={() => navigate(-1)} className="flex items-center cursor-pointer gap-2">
+              <span role="button" className="text-2xl  font-bold ">
+                {reactIcons.goback}
+              </span>
+              <span className="font-semibold"> Leave Test</span>
+            </div>
+            <div onClick={() => handleToggle({ key: 'isQuestionStatusOpen', value: true })} className={`w-10 h-10 flex-center text-3xl cursor-pointer `}>
+              {reactIcons.menu}
+            </div>
+          </div>
+        </div>
+      </div>
       <section className=" pb-28">
         {
           quizInfoLoading || fetchLoading ? (
@@ -138,7 +157,6 @@ const QuizPlay = () => {
               isLastQuestion={isLastQuestion}
               questions={questions}
               quizId={quizId}
-              key={currentQuestion}
               quizInfo={quizInfo}
               isIncludedReview={isIncludedReview}
               dispatch={dispatch}

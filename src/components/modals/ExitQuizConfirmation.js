@@ -34,7 +34,7 @@ const ExitQuizConfirmation = ({ isOpen, closeModal, handleYes }) => {
                 className="w-full max-w-md transform overflow-hidden rounded-md bg-white p-6 text-left align-middle shadow-xl transition-all"
               >
                 <Dialog.Title as="h4" className="heading-5 text-center">
-                  Are you sure you want to exit this Quiz?
+                  Are you sure you want to exit this Test?
                 </Dialog.Title>
 
                 <div className="mt-4 flex justify-center gap-6 items-center">

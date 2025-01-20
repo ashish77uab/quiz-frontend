@@ -18,6 +18,7 @@ const Option = ({
     dispatch,
     currentQuestionToWork,
     question,
+    isNotLeftTime
 }) => {
     const { questions } = useSelector(state => state.quiz)
     const handleSelectOption = (num) => {
@@ -40,14 +41,14 @@ const Option = ({
     }
 
     return (
-        <div onClick={() => handleSelectOption(num)} className={`flex cursor-pointer items-center bg-white gap-4 rounded-md py-5 px-4 border ${renderClassName(question)}`}>
+        <button disabled={isNotLeftTime} onClick={() => handleSelectOption(num)} className={`flex w-full  disabled:opacity-40 cursor-pointer items-center bg-white gap-4 rounded-md py-5 px-4 border ${renderClassName(question)}`}>
             <span className='font-semibold'>{answerObj[num]}.</span>
             <span className='font-medium'>{text}</span>
-        </div>
+        </button>
     )
 
 }
-const SingleQuestion = ({ question, resetState, questions, isLastQuestion, timeToReturn, quizId, currentQuestion, dispatch, isIncludedReview, quizInfo, currentQuestionToWork }) => {
+const SingleQuestion = ({ question, resetState, questions, isLastQuestion, timeToReturn, quizId, currentQuestion, dispatch, isIncludedReview, quizInfo, currentQuestionToWork, isNotLeftTime }) => {
 
     const [isConfirmedOpen, setIsConfirmedOpen] = useState(false)
     const [updateLoading, setUpdateLoading] = useState(false)
@@ -126,6 +127,8 @@ const SingleQuestion = ({ question, resetState, questions, isLastQuestion, timeT
         }
 
     }
+
+
     return (
         <div>
             <div className="flex items-center justify-between gap-4 py-4 px-4 bg-pink-50">
@@ -143,19 +146,19 @@ const SingleQuestion = ({ question, resetState, questions, isLastQuestion, timeT
                     </div>
 
                 </div>
-                <div onClick={() => handleMarkAndReview(true)} className="flex items-center gap-1">
+                <button disabled={isNotLeftTime} onClick={() => handleMarkAndReview(true)} className="flex items-center gap-1">
                     {isIncludedReview ? <span className="text-2xl text-primary-pink">{reactIcons?.starFill}</span> : <span className="text-2xl">{reactIcons?.star}</span>}
-                </div>
+                </button>
             </div>
             <div className='py-4 px-4'>
                 <div className='mb-6'>
                     <DangerouslySetHtml html={question?.question} />
                 </div>
                 <div className='space-y-4'>
-                    <Option question={question} text={question?.option1} num={'1'} dispatch={dispatch} currentQuestionToWork={currentQuestionToWork} />
-                    <Option question={question} text={question?.option2} num={'2'} dispatch={dispatch} currentQuestionToWork={currentQuestionToWork} />
-                    <Option question={question} text={question?.option3} num={'3'} dispatch={dispatch} currentQuestionToWork={currentQuestionToWork} />
-                    <Option question={question} text={question?.option4} num={'4'} dispatch={dispatch} currentQuestionToWork={currentQuestionToWork} />
+                    <Option isNotLeftTime={isNotLeftTime} question={question} text={question?.option1} num={'1'} dispatch={dispatch} currentQuestionToWork={currentQuestionToWork} />
+                    <Option isNotLeftTime={isNotLeftTime} question={question} text={question?.option2} num={'2'} dispatch={dispatch} currentQuestionToWork={currentQuestionToWork} />
+                    <Option isNotLeftTime={isNotLeftTime} question={question} text={question?.option3} num={'3'} dispatch={dispatch} currentQuestionToWork={currentQuestionToWork} />
+                    <Option isNotLeftTime={isNotLeftTime} question={question} text={question?.option4} num={'4'} dispatch={dispatch} currentQuestionToWork={currentQuestionToWork} />
 
                 </div>
             </div>
@@ -179,14 +182,16 @@ const SingleQuestion = ({ question, resetState, questions, isLastQuestion, timeT
                 </div>
                 <div className="flex items-center gap-2 justify-between">
                     <button
+                        disabled={isNotLeftTime}
                         onClick={isIncludedReview ? () => handleMarkAndReview(true) : () => handleMarkAndReview(false)}
-                        className={`rounded-md border-c text-xs px-4 py-2  flex-shrink-0  flex-1 ${isIncludedReview ? 'border-primary-pink text-primary-pink' : ''} `}
+                        className={`rounded-md disabled:opacity-40 border-c text-xs px-4 py-2  flex-shrink-0  flex-1 ${isIncludedReview ? 'border-primary-pink text-primary-pink' : ''} `}
                     >
                         {isIncludedReview ? 'Marked' : 'Mark & Next'}
                     </button>
                     <button
+                        disabled={isNotLeftTime}
                         onClick={clearSelection}
-                        className={`rounded-md border-c text-xs px-4 py-2 flex-1  `}
+                        className={`rounded-md disabled:opacity-40 border-c text-xs px-4 py-2 flex-1  `}
                     >
                         Clear
                     </button>
@@ -209,6 +214,7 @@ const SingleQuestion = ({ question, resetState, questions, isLastQuestion, timeT
                 title={"Quiz"}
                 loading={updateLoading}
                 Timer={timeToReturn}
+
             />
 
         </div>

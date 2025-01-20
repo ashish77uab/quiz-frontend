@@ -9,7 +9,7 @@ const MainLayout = () => {
 
   return (
     <div className="flex flex-col justify-between min-h-screen max-w-md mx-auto border-x border-x-zinc-100">
-      <Navbar />
+
       <div className="flex-grow flex flex-col relative bg-blue-50/50">
         <Outlet />
       </div>

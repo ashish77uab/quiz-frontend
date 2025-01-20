@@ -15,8 +15,7 @@ const RenderQuizPlay = ({
     currentQuestionToWork,
 }) => {
     const { timeToReturn, time } = useCountdownTimer({ timer: quizInfo?.time })
-    const canLeave = time === 0;
-
+    const isNotLeftTime = time === 0;
 
     return (
         <>
@@ -44,6 +43,7 @@ const RenderQuizPlay = ({
                         question={questions[currentQuestion]}
                         currentQuestion={currentQuestion}
                         currentQuestionToWork={currentQuestionToWork}
+                        isNotLeftTime={isNotLeftTime}
                     />
 
                 </div>
