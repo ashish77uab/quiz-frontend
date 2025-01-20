@@ -32,7 +32,7 @@ const Navbar = () => {
             <div className="">
               <Link to="/" className="">
                 <span className="text-xl font-bold text-primary-pink">
-                  Play Quiz
+                  Testbook
                 </span>
               </Link>
             </div>
