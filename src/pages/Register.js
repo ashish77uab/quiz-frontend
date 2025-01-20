@@ -42,9 +42,9 @@ const Register = () => {
   const handleSubmit = async (values, actionForm) => {
     setIsLoading(true)
     try {
-      let formData = { ...values };
+      let formData = { ...values, dob: new Date(values?.dob).toISOString(), role: 'User' };
       delete formData.confirmPassword;
-      const res = await register(serialize(formData));
+      const res = await register(formData);
       const { status, data } = res;
       if (status >= 200 && status < 300) {
         toast.success(<ToastMsg title={`Register Successfully`} />);
