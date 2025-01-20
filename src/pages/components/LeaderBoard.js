@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import ToastMsg from '../../components/toast/ToastMsg';
 import InfiniteScrollComponent from '../../components/InfiniteScrollComponent';
 import { Tab } from '../QuizResult';
+import SpinnerInline from '../../components/loaders/SpinnerInline';
 
 const LeaderBoard = ({ quizId, selectedTab }) => {
     const limit = 20;
@@ -12,8 +13,9 @@ const LeaderBoard = ({ quizId, selectedTab }) => {
     const loadMoreData = () => {
         setPage(page + 1)
     }
-
+    const [fetchLoading, setFetchLoading] = useState(false);
     const getQuizResultLeaderBoardData = async (quizId, page) => {
+        setFetchLoading(true)
         try {
             const res = await getQuizResultLeaderBoard(quizId, page, limit);
             const { status, data } = res;
@@ -29,6 +31,8 @@ const LeaderBoard = ({ quizId, selectedTab }) => {
         } catch (error) {
             console.log(error)
             toast.error(<ToastMsg title={error?.response?.data?.message} />);
+        } finally {
+            setFetchLoading(false)
         }
     };
     useEffect(() => {
@@ -47,55 +51,56 @@ const LeaderBoard = ({ quizId, selectedTab }) => {
     }
     return (
         <div className='px-4'>
-            {leaderboard?.count > 0 && <>
-                <header className='pt-4'>
-                    <h6 className="heading-6 mb-1"> Leaderboard</h6>
-                </header>
-                <div className='my-2 scrollable-content '>
-                    <InfiniteScrollComponent
-                        hasMore={leaderboard?.result?.length < leaderboard?.count}
-                        fetchData={loadMoreData}
-                        length={leaderboard?.result?.length}
-                        limit={limit}
-                        totalPages={leaderboard?.totalPages}
-                        page={page}
-                    >
-                        <div className="space-y-2">
-                            {leaderboard?.result?.map((result, index) => {
-                                const totalMarks = result?.quiz?.questionCount * result?.quiz?.rightMark
-                                return (
-                                    <div className="border-c   block rounded-md shadow-card bg-white cursor-pointer">
-                                        <div className='flex justify-between gap-4 p-4 items-center'>
-                                            <div className='flex items-center gap-4'>
-                                                <div className={`  text-sm font-semibold  text-primary-gray flex-center`}>
-                                                    {result?.rank}
-                                                </div>
-                                                <div className={`w-8 h-8 rounded-full ${returnClassColor(index)} text-white flex-center`}>
-                                                    {result?.userDetails?.fullName?.[0]}
-                                                </div>
+            <header className='pt-4'>
+                <h6 className="heading-6 mb-1"> Leaderboard</h6>
+            </header>
+            <div className='my-2 scrollable-content '>
+                <InfiniteScrollComponent
+                    hasMore={leaderboard?.result?.length < leaderboard?.count}
+                    fetchData={loadMoreData}
+                    length={leaderboard?.result?.length}
+                    limit={limit}
+                    totalPages={leaderboard?.totalPages}
+                    page={page}
+                >
+                    <div className="space-y-2">
+                        {leaderboard?.result?.map((result, index) => {
+                            const totalMarks = result?.quiz?.questionCount * result?.quiz?.rightMark
+                            return (
+                                <div className="border-c   block rounded-md shadow-card bg-white cursor-pointer">
+                                    <div className='flex justify-between gap-4 p-4 items-center'>
+                                        <div className='flex items-center gap-4'>
+                                            <div className={`  text-sm font-semibold  text-primary-gray flex-center`}>
+                                                {result?.rank}
                                             </div>
-                                            <div className='flex-grow'>
-                                                <div className='font-medium text-sm'> {result?.userDetails?.fullName}</div>
-
-
+                                            <div className={`w-8 h-8 rounded-full ${returnClassColor(index)} text-white flex-center`}>
+                                                {result?.userDetails?.fullName?.[0]}
                                             </div>
-                                            <div className='text-sm font-semibold'>
-                                                <span className=''>{result?.totalMarksGot}</span> / <span>{totalMarks}</span>
-                                            </div>
+                                        </div>
+                                        <div className='flex-grow'>
+                                            <div className='font-medium text-sm'> {result?.userDetails?.fullName}</div>
 
 
                                         </div>
+                                        <div className='text-sm font-semibold'>
+                                            <span className=''>{result?.totalMarksGot}</span> / <span>{totalMarks}</span>
+                                        </div>
+
 
                                     </div>
-                                )
-                            }
 
-                            )}
-                        </div>
-                    </InfiniteScrollComponent>
-                </div>
+                                </div>
+                            )
+                        }
 
-            </>}
+                        )}
+                        {fetchLoading && (
+                            <SpinnerInline />
+                        )}
+                    </div>
+
+                </InfiniteScrollComponent>
+            </div>
         </div>
 
     )

@@ -1,6 +1,7 @@
 
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import SpinnerInline from './loaders/SpinnerInline'
 
 const InfiniteScrollComponent = ({
   fetchData,
@@ -19,7 +20,7 @@ const InfiniteScrollComponent = ({
       dataLength={length || limit}
       next={fetchData}
       hasMore={page < totalPages && hasMore}
-      loader={<div className='  py-4 d-flex justify-content-center'>Loading...</div>}
+      loader={<SpinnerInline />}
       scrollableTarget={scrollableTarget}
       scrollThreshold={0.7}
     >

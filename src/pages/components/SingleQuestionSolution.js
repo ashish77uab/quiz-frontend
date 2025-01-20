@@ -86,7 +86,7 @@ const SingleQuestionSolution = ({ question, isLastQuestion, quizInfo, currentQue
 
                 </div>
                 <div className='my-4'>
-                    <button onClick={() => setIsShowSolution(prev => !prev)} className='btn-outline-primary w-full'> View Solution</button>
+                    <button onClick={() => setIsShowSolution(prev => !prev)} className='btn-outline-primary w-full'> {isShowSolution ? "Hide Solution" : "View Solution"}</button>
                 </div>
                 {isShowSolution && <div className='mb-6 p-4 bg-white rounded-md'>
                     <DangerouslySetHtml html={question?.question?.writtenAnswer} />
