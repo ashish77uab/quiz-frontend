@@ -11,7 +11,7 @@ const useQuestionStatus = () => {
     const handleQuestionStatusClick = (currentQuestion) => {
         dispatch(setCurrentQuestion(currentQuestion))
     }
-    const totalQuestions = questions.length;
+    const totalQuestions = questions?.length;
     const totalReviewed = questions?.filter(item => item?.isReviewed).length;
     const totalAnswered = questions?.filter(item => item?.yourAnswer).length;
     return {

@@ -18,13 +18,13 @@ const QuizPlay = () => {
     currentQuestion,
   } = useSelector(state => state.quiz)
   const [isConfirm, setIsConfirm] = useState(false)
-  const currentQuestionToWork = questions[currentQuestion]
+  const currentQuestionToWork = questions?.[currentQuestion]
   const isIncludedReview = questions?.findIndex((item) => item?._id === currentQuestionToWork?._id && item?.isReviewed) >= 0
   const { quizId } = useParams();
   const [fetchLoading, setFetchLoading] = useState(false);
   const [quizInfo, setQuizInfo] = useState({});
   const [quizInfoLoading, setQuizInfoLoading] = useState(true);
-  const totalQuestions = questions.length - 1
+  const totalQuestions = questions?.length - 1
   const isLastQuestion = totalQuestions === currentQuestion
 
 
@@ -160,7 +160,7 @@ const QuizPlay = () => {
               quizInfo={quizInfo}
               isIncludedReview={isIncludedReview}
               dispatch={dispatch}
-              question={questions[currentQuestion]}
+              question={questions?.[currentQuestion]}
               currentQuestion={currentQuestion}
               currentQuestionToWork={currentQuestionToWork}
 
