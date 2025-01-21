@@ -20,7 +20,8 @@ import {
   QuizJoin,
   Login,
   Register,
-  SolutionPage
+  SolutionPage,
+  ViewQuizQuestion
 } from "./pages";
 import { getUser } from "./api/api";
 import { useDispatch } from "react-redux";
@@ -101,7 +102,8 @@ function App() {
               <Route path="users" element={<AllUsers />} />
               <Route path="quiz" element={<AllQuiz />} />
               <Route path="quiz/add-question/:quizId" element={<AddQuizQuestion />} />
-              <Route path="quiz/update-question/:quizId" element={<UpdateQuizQuestion />} />
+              <Route path="quiz/update-question/:questionId" element={<UpdateQuizQuestion />} />
+              <Route path="quiz/view-questions/:quizId" element={<ViewQuizQuestion />} />
               <Route path="transactions" element={<AllTransactions />} />
               <Route path="user/:userId" element={<UserDetails />} />
               <Route path="user-stocks/:userId" element={<UserStocks />} />

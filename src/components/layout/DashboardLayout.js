@@ -33,7 +33,7 @@ const DashboardLayout = () => {
       </div>
       <div className="h-[calc(100%-104px)] flex flex-1">
         <div
-          className={`relative border-r border-r-zinc-200 duration-300    h-full flex flex-col  justify-between py-4 gap-3 ${sideBarOpen ? "w-[235px] items-start" : "w-[72px]  items-center"
+          className={`relative border-r border-r-zinc-200 duration-300    h-full flex flex-col  justify-between py-4 gap-3 ${sideBarOpen ? "w-[235px] items-start" : "w-[50px]  items-center"
             }`}
         >
           <div
@@ -100,7 +100,7 @@ const DashboardLayout = () => {
           </button>
         </div>
         <div
-          className="flex-1 py-6 px-8 overflow-y-auto h-full "
+          className="flex-1 md:py-6 py-3 px-4 md:px-8 overflow-y-auto h-full "
           id="scrollableDiv"
         >
           <Outlet />

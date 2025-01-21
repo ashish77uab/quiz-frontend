@@ -227,7 +227,8 @@ export const getQuizResultLeaderBoard = (quizId, page, limit) => API.get(`quiz/s
 export const quizSingleResult = (resultId, quizId) => API.get(`quiz/single-result?resultId=${resultId}&quizId=${quizId}`);
 
 // question
+export const getQuizQuestionInfoById = (questionId) => API.get(`question/question-by-id?questionId=${questionId}`);
 export const getQuizQuestionList = (quizId) => API.get(`question/list?quizId=${quizId}`);
-export const createQuestion = (data) => API.post(`question/create-question`, data);
-export const updateQuestion = (data) => API.put(`question/update-question`, data);
+export const createQuestion = (data, quizId) => API.post(`question/create-question?quizId=${quizId}`, data);
+export const updateQuestion = (data, questionId) => API.put(`question/update-question?questionId=${questionId}`, data);
 

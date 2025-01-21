@@ -40,7 +40,7 @@ const AllUsers = () => {
   return (
     <>
       <div>
-        <header className="mb-4 flex items-center justify-between">
+        <header className="mb-4 md:flex-row flex-col gap-2 flex md:items-center justify-between">
           <h4 className="heading-4">All Users <span className="text-sm align-middle">({numberWithCommas(users?.totalUsers)})</span> </h4>
           <div className="flex items-center justify-between gap-2">
             <TextInput

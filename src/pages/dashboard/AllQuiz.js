@@ -69,7 +69,7 @@ const AllQuiz = () => {
   return (
     <>
       <div>
-        <header className="mb-4 flex items-center justify-between">
+        <header className="mb-4 md:flex-row flex-col gap-2 flex md:items-center justify-between">
           <h4 className="heading-4">All Quiz <span className="text-sm align-middle">({numberWithCommas(quizes?.totalQuizes)})</span> </h4>
           <div className="flex items-center justify-between gap-2">
             <TextInput
@@ -116,12 +116,10 @@ const AllQuiz = () => {
                       <td><div className="font-semibold">{quiz?.time} mins</div></td>
                       <td>
                         <div className="flex justify-end gap-2">
-                          {quiz?.isAdded ? <button onClick={() => navigate(`/dashboard/quiz/update-question/${quiz?._id}`)} className="btn-primary">
-                            Update
-                          </button> : <button onClick={() => navigate(`/dashboard/quiz/add-question/${quiz?._id}`)} className="btn-primary">
-                            Add
+
+                          <button onClick={() => navigate(`/dashboard/quiz/view-questions/${quiz?._id}`)} className="btn-primary">
+                            View Questions
                           </button>
-                          }
                           <ActionButton
                             onClick={() => {
                               setQuiz(quiz);
@@ -173,7 +171,7 @@ const AllQuiz = () => {
 
           </div>
         </div>
-      </div>
+      </div >
       <CreateAndUpdateQuiz
         isOpen={isQuizCreateOpen}
         quiz={quiz}

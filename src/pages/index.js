@@ -19,8 +19,10 @@ import AllTransactions from "./dashboard/AllTransactions";
 import AllQuiz from "./dashboard/AllQuiz";
 import AddQuizQuestion from "./dashboard/AddQuizQuestion";
 import UpdateQuizQuestion from "./dashboard/UpdateQuizQuestion";
+import ViewQuizQuestion from "./dashboard/ViewQuizQuestion";
 
 export {
+  ViewQuizQuestion,
   QuizJoin,
   QuizResult,
   QuizPlay,
