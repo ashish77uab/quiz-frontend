@@ -216,6 +216,7 @@ export const contactUsRequest = (formData) => API.post(`auth/contact-us`, formDa
 
 // quiz
 export const getAllQuizList = (params) => API.get(`quiz/list?page=${params?.page}&limit=${params?.limit}&search=${params?.search}`);
+export const getAllQuizListForUser = (params) => API.get(`quiz/list-user?page=${params?.page}&limit=${params?.limit}&search=${params?.search}`);
 export const createQuiz = (data) => API.post(`quiz/create-quiz`, data);
 export const updateQuiz = (data, quizId) => API.put(`quiz/update-quiz/${quizId}`, data);
 export const getQuizInfo = (quizId) => API.get(`quiz/single-quiz/${quizId}`);
