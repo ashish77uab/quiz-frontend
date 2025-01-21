@@ -140,7 +140,7 @@ const QuizResult = () => {
                             <span className=""> |</span>
                           </div>}
                           <div className="flex items-center gap-2 text-xs  text-gray-400 ">
-                            <span>{questionStatics?.[index]?.percentageCorrect}%</span> <span>got it right</span>
+                            <span>{questionStatics?.[index]?.percentageCorrect?.toFixed(2)}%</span> <span>got it right</span>
                           </div>
                         </div>
                         <Link to={`/quiz/answer/${index}/${singleResult?.result?.[0]?.quizId}`} state={{ answer: item }} className="text-xs text-primary-blue font-medium">View Answer</Link>

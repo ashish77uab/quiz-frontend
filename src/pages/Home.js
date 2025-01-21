@@ -7,6 +7,7 @@ import { getUserToken } from "../utils/constants";
 import Spinner from "../components/loaders/Spinner";
 import Navbar from "../components/layout/Navbar";
 import InfiniteScrollComponent from "../components/InfiniteScrollComponent";
+import Pay from "./components/Pay";
 
 
 const Home = () => {
@@ -84,6 +85,7 @@ const Home = () => {
             )}
           </div>
         </InfiniteScrollComponent>
+        <Pay />
       </section>
 
     </>
