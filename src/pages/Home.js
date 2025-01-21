@@ -85,7 +85,7 @@ const Home = () => {
             )}
           </div>
         </InfiniteScrollComponent>
-        <Pay />
+        {/* <Pay /> */}
       </section>
 
     </>
