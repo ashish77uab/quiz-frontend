@@ -34,7 +34,7 @@ const QuizPlay = () => {
       const res = await getQuizQuestionList(quizId);
       const { status, data } = res;
       if (status >= 200 && status <= 300) {
-        dispatch(setQuestions(data?.quizes?.map((item) => ({ ...item, isReviewed: false, yourAnswer: null, questionTime: 0, questionTimer: '' }))));
+        dispatch(setQuestions(data?.questions?.map((item) => ({ ...item, isReviewed: false, yourAnswer: null, questionTime: 0, questionTimer: '' }))));
       } else {
         toast.error(<ToastMsg title={data.message} />);
       }
