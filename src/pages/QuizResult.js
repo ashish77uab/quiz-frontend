@@ -52,6 +52,7 @@ const QuizResult = () => {
     }
   }, [resultId]);
   const questionAnswer = singleResult?.result?.[0]?.questionAnswer
+  const questionStatics = singleResult?.questionStatistics
   return (
     <>
       <TopBar handleBack={() => isAttempted ? navigate(-1) : navigate('/')} />
@@ -131,12 +132,16 @@ const QuizResult = () => {
                   return (
                     <div key={index} className="p-3 rounded-md bg-white border-c ">
                       <div className="flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2">
                           <div className={`w-6 h-6 rounded-full flex-center  text-xs ${item?.isCorrect !== null ? item?.isCorrect ? 'text-white bg-green-500' : 'text-white bg-red-500' : 'text-black bg-gray-200'}`} >{item?.questionNumber}</div>
                           {item?.questionTimer && <div className="flex items-center gap-2  text-gray-400">
                             <div className="text-xl">{reactIcons.watch}</div>
                             <div className="text-xs" >{item?.questionTimer}</div>
+                            <span className=""> |</span>
                           </div>}
+                          <div className="flex items-center gap-2 text-xs  text-gray-400 ">
+                            <span>{questionStatics?.[index]?.percentageCorrect}%</span> <span>got it right</span>
+                          </div>
                         </div>
                         <Link to={`/quiz/answer/${index}/${singleResult?.result?.[0]?.quizId}`} state={{ answer: item }} className="text-xs text-primary-blue font-medium">View Answer</Link>
                       </div>
