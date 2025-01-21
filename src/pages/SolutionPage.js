@@ -7,9 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import SingleQuestionSolution from "./components/SingleQuestionSolution";
 import { setResultCurrentQuestion } from "../redux/features/quizSlice";
 import TopBar from "../components/layout/TopBar";
+import Spinner from "../components/loaders/Spinner";
 
 const SolutionPage = () => {
   const [quizInfo, setQuizInfo] = useState({});
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch()
   const {
     singleResult,
@@ -23,6 +25,7 @@ const SolutionPage = () => {
   const isLastQuestion = totalQuestions === currentQuestion
 
   const getQuizInfoById = async (id) => {
+    setLoading(true)
     try {
       const res = await getQuizInfo(id);
       const { status, data } = res;
@@ -34,6 +37,8 @@ const SolutionPage = () => {
     } catch (error) {
       console.log(error)
       toast.error(<ToastMsg title={error?.response?.data?.message} />);
+    } finally {
+      setLoading(false)
     }
   };
   useEffect(() => {
@@ -54,6 +59,7 @@ const SolutionPage = () => {
   return (
     <>
       <TopBar />
+      {loading && <Spinner />}
       <section className=" pb-28">
 
         <div className=" h-full">

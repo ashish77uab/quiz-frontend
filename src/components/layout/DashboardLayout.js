@@ -5,7 +5,7 @@ import { links } from "./../../utils/constants";
 import { useSelector } from "react-redux";
 
 const DashboardLayout = () => {
-  const [sideBarOpen, setSidebarOpen] = useState(true);
+  const [sideBarOpen, setSidebarOpen] = useState(window.screen.width < 768 ? false : true);
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate()
   useEffect(() => {
@@ -18,16 +18,16 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex h-screen w-full flex-col overflow-hidden">
-      <div className="sticky py-6 flex-shrink-0 z-50 top-0  flex justify-between gap-6 items-center px-8 border-b border-b-zinc-200">
-        <Link className="heading-3" to={"/dashboard"}>
+      <div className="sticky md:py-6 py-4 flex-shrink-0 z-50 top-0  flex justify-between gap-6 items-center md:px-8 px-4 border-b border-b-zinc-200">
+        <Link className="md:heading-5 heading-6" to={"/dashboard"}>
           Admin
         </Link>
         <div className="flex gap-2 items-center">
           <div className="flex gap-2 items-center">
-            <span className="font-semibold text-2xl">{user?.fullName}</span>
-            <div className="w-12 h-12 rounded-full cursor-pointer text-white bg-primary-pink flex-center">
-              <span className="text-18   font-semibold capitalize">{user?.fullName?.[0]}</span>
-            </div>
+            <span className="font-medium text-base md:text-2xl">{user?.fullName}</span>
+            {/* <div onClick={() => setSidebarOpen(true)} className={`w-10 md:hidden h-10 flex-center text-3xl cursor-pointer `}>
+              {reactIcons.menu}
+            </div> */}
           </div>
         </div>
       </div>

@@ -105,9 +105,9 @@ const UpdateQuizQuestion = () => {
                             setFieldValue
                         }) => {
                             return (
-                                <Form className="w-full space-y-4 mt-4">
+                                <Form className="w-full space-y-4 mt-2 md:mt-4">
                                     <div className="flex gap-2 items-start mb-6">
-                                        <div className="grid grid-cols-2 gap-4 flex-grow" >
+                                        <div className="md:grid md:grid-cols-2 md:gap-4 flex flex-col gap-2 flex-grow" >
                                             <div className="col-span-2 flex-1">
                                                 <EditorCustom
                                                     label={`Question`}
@@ -190,7 +190,7 @@ const UpdateQuizQuestion = () => {
 
                                         </div>
                                     </div>
-                                    <footer className="py-4  font-medium">
+                                    <footer className="md:py-4 py-2  font-medium">
                                         <button type="submit" className="btn-outline-primary">
                                             {loading ? 'Loading...' : 'Update'}
                                         </button>
