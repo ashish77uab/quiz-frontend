@@ -20,8 +20,10 @@ import AllQuiz from "./dashboard/AllQuiz";
 import AddQuizQuestion from "./dashboard/AddQuizQuestion";
 import UpdateQuizQuestion from "./dashboard/UpdateQuizQuestion";
 import ViewQuizQuestion from "./dashboard/ViewQuizQuestion";
+import PaymentStatus from "./PaymentStatus";
 
 export {
+  PaymentStatus,
   ViewQuizQuestion,
   QuizJoin,
   QuizResult,

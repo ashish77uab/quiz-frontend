@@ -155,6 +155,7 @@ export const register = (formData) => API.post(`auth/register`, formData);
 export const updatePassword = (formData) => API.post(`auth/update-password`, formData);
 export const addDeposit = (formData) => API.post(`auth/add-deposit`, formData);
 export const withdrawFund = (formData) => API.post(`auth/withdraw-fund`, formData);
+export const getPaymentStatus = (transactionId) => API.post(`auth/phonepe/status/${transactionId}`);
 export const getUserTransactions = (data) => {
   const queryString = new URLSearchParams(data)?.toString()
   return API.get(`auth/transactions?${queryString}`)
