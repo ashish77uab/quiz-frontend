@@ -53,6 +53,7 @@ const QuizResult = () => {
   }, [resultId]);
   const questionAnswer = singleResult?.result?.[0]?.questionAnswer
   const questionStatics = singleResult?.questionStatistics
+  const quizStatistics = singleResult?.quizStatistics?.[0]
   return (
     <>
       <TopBar handleBack={() => isAttempted ? navigate(-1) : navigate('/')} />
@@ -94,6 +95,16 @@ const QuizResult = () => {
                 </div>
                 <div>
                   <span className="font-semibold">{singleResult?.result?.[0]?.totalMarksGot} </span>/ <span className="text-[13px]">{singleResult?.result?.[0]?.quizDetails?.questionCount * singleResult?.result?.[0]?.quizDetails?.rightMark}</span>
+                </div>
+              </div>
+              <div className="flex justify-end gap-2 items-center py-2">
+                <div className="flex items-center gap-1">
+                  <span className="text-xs text-muted">Average Score:</span>
+                  <span className="text-[13px] font-medium">{Number(quizStatistics?.averageScore)?.toFixed(2)}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="text-xs text-muted">Best Score:</span>
+                  <span className="text-[13px] font-medium">{Number(quizStatistics?.highestMark)?.toFixed(2)}</span>
                 </div>
               </div>
               <div className="border-c p-4 bg-white rounded-md shadow-card">
