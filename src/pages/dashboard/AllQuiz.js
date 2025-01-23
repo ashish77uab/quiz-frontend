@@ -96,10 +96,11 @@ const AllQuiz = () => {
                 <tr>
                   <th className="w-[80px]">Sr.No</th>
                   <th>Name</th>
-                  <th>Total Questions</th>
-                  <th>Right answer mark</th>
-                  <th>Negative answer mark</th>
+                  <th>Total Que.</th>
+                  <th>Right  mark</th>
+                  <th>Negative mark</th>
                   <th>Time</th>
+                  <th>Total Users Attempted</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -108,12 +109,13 @@ const AllQuiz = () => {
 
                   return (
                     <tr>
-                      <td className="w-[80px]">{index + 1}</td>
+                      <td className="w-[80px]">{limit * (page - 1) + index + 1}</td>
                       <td>{quiz?.name}</td>
                       <td><div>{quiz?.questionCount}</div></td>
                       <td><div>{quiz?.rightMark}</div></td>
                       <td><div>{quiz?.negativeMark}</div></td>
                       <td><div className="font-semibold">{quiz?.time} mins</div></td>
+                      <td><div className="font-semibold">{numberWithCommas(quiz?.totalUsersAttempted)}</div></td>
                       <td>
                         <div className="flex justify-end gap-2">
 

@@ -76,7 +76,7 @@ const AllUsers = () => {
 
                   return (
                     <tr>
-                      <td className="w-[80px]">{index + 1}</td>
+                      <td className="w-[80px]">{limit * (page - 1) + index + 1}</td>
                       <td>{user?.fullName}</td>
                       <td><div>{user?.email}</div></td>
                       <td><div>{user?.phone}</div></td>
