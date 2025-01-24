@@ -17,9 +17,9 @@ const Pay = ({ amount, quizId, userId }) => {
             merchantTransactionId: transactionid,
             merchantUserId: 'MUID-' + uuidv4().toString(36).slice(-6),
             amount: amount * 100,
-            redirectUrl: `${baseURL}/auth/phonepe/status?quizId=${quizId}&userId=${userId}`,
+            redirectUrl: `${baseURL}auth/phonepe/status?quizId=${quizId}&userId=${userId}`,
             redirectMode: "POST",
-            callbackUrl: `${baseURL}/auth/phonepe/status?quizId=${quizId}&userId=${userId}`,
+            callbackUrl: `${baseURL}auth/phonepe/status?quizId=${quizId}&userId=${userId}`,
             mobileNumber: '9874563210',
             paymentInstrument: {
                 type: "PAY_PAGE",
