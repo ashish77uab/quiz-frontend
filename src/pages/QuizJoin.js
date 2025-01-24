@@ -5,11 +5,13 @@ import { Link, useParams } from "react-router-dom";
 import { getQuizInfo } from "../api/api";
 import AttemptedQuestion from "./components/AttemptedQuestion";
 import TopBar from "../components/layout/TopBar";
-import Spinner from "../components/loaders/Spinner";
 import SpinnerInline from "../components/loaders/SpinnerInline";
+import Pay from "./components/Pay";
+import { useSelector } from "react-redux";
 
 
 const QuizJoin = () => {
+  const user = useSelector((state) => state.auth.user);
   const { quizId } = useParams()
   const [quizInfo, setQuizInfo] = useState({});
   const [fetchLoading, setFetchLoading] = useState(false);
@@ -73,8 +75,11 @@ const QuizJoin = () => {
                     <li className="text-muted text-sm"> I have read the all the instructions carefully and have understood them. I agree not to cheat or use unfair means in this examination. I understand that using unfair means of any sort for my own or someone else's advantage will lead to my immediate disqualification. The decision of admin will be final in these matters and cannot be appealed.</li>
                   </ul>
                 </div>
+
                 <div className="mb-4">
-                  <Link to={`/play-quiz/${quizId}`} replace className="btn-primary flex-center text-center  w-full">Start Test</Link>
+                  {quizInfo?.isPaid && !quizInfo?.isPaymentDone ? <div className="py-2 px-3 bg-blue-50/50 flex justify-between gap-2">
+                    <Pay amount={quizInfo?.amount} quizId={quizInfo?._id} userId={user?._id} />
+                  </div> : <Link to={`/play-quiz/${quizId}`} replace className="btn-primary flex-center text-center  w-full">Start Test</Link>}
                 </div>
               </>
 

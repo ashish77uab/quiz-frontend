@@ -159,24 +159,35 @@ export const contactValidationSchema = yup.object().shape({
         .required("Message is required"),
 });
 
-export const createQuizValidationSchema = yup.object().shape({
-    name: yup
-        .string()
-        .required("Field is required"),
-    questionCount: yup
-        .number()
-        .required("Field is required"),
-    rightMark: yup
-        .number()
-        .required("Field is required"),
-    negativeMark: yup
-        .number()
-        .required("Field is required"),
-    time: yup
-        .number()
-        .required("Field is required"),
-
-});
+export const createQuizValidationSchema = () => {
+    return yup.object().shape({
+        name: yup
+            .string()
+            .required("Field is required"),
+        questionCount: yup
+            .number()
+            .required("Field is required"),
+        rightMark: yup
+            .number()
+            .required("Field is required"),
+        negativeMark: yup
+            .number()
+            .required("Field is required"),
+        time: yup
+            .number()
+            .required("Field is required"),
+        isPaid: yup
+            .boolean()
+        ,
+        amount: yup
+            .number()
+            .when("isPaid", {
+                is: true, // Conditional logic: applies when isPaid is true
+                then: () => yup.number().min(10, 'Minimum amount is 10').required("Price field is required"), // Make amount required
+                otherwise: () => yup.number().notRequired(), // Not required when isPaid is false
+            }),
+    });
+};
 export const createQuizQuestionSchema = () => {
     return yup.object().shape({
         question: yup.string()

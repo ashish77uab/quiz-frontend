@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import sha256 from "crypto-js/sha256";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
 import { Buffer } from 'buffer'
-const Pay = () => {
-    const navigate = useNavigate();
+const Pay = ({ amount, quizId, userId }) => {
     const makePayment = async (e) => {
 
         e.preventDefault();
@@ -16,10 +14,10 @@ const Pay = () => {
             merchantId: process.env.REACT_APP_MERCHANT_ID,
             merchantTransactionId: transactionid,
             merchantUserId: 'MUID-' + uuidv4().toString(36).slice(-6),
-            amount: 10000,
-            redirectUrl: `http://localhost:5000/auth/phonepe/status/${transactionid}`,
+            amount: amount * 100,
+            redirectUrl: `http://localhost:5000/auth/phonepe/status?quizId=${quizId}&userId=${userId}`,
             redirectMode: "POST",
-            callbackUrl: `http://localhost:5000/auth/phonepe/status/${transactionid}`,
+            callbackUrl: `http://localhost:5000/auth/phonepe/status?quizId=${quizId}&userId=${userId}`,
             mobileNumber: '9874563210',
             paymentInstrument: {
                 type: "PAY_PAGE",
@@ -70,12 +68,12 @@ const Pay = () => {
 
 
     return (
-        <div>
+        <div className='w-full'>
             <button
                 onClick={(e) => makePayment(e)}
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-                Pay 100
+                Pay &nbsp; Rs.{amount}
             </button>
         </div>
     )

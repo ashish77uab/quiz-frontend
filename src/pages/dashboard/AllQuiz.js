@@ -100,7 +100,9 @@ const AllQuiz = () => {
                   <th>Right  mark</th>
                   <th>Negative mark</th>
                   <th>Time</th>
-                  <th>Total Users Attempted</th>
+                  <th>Users Attempted</th>
+                  <th>IsPaid</th>
+                  <th>Amount</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -116,6 +118,8 @@ const AllQuiz = () => {
                       <td><div>{quiz?.negativeMark}</div></td>
                       <td><div className="font-semibold">{quiz?.time} mins</div></td>
                       <td><div className="font-semibold">{numberWithCommas(quiz?.totalUsersAttempted)}</div></td>
+                      <td><div className={`font-semibold ${quiz?.isPaid ? 'text-green-500' : 'text-red-500'}`}>{quiz?.isPaid ? 'Yes' : 'No'}</div></td>
+                      <td><div>Rs. {numberWithCommas(quiz?.amount)}</div></td>
                       <td>
                         <div className="flex justify-end gap-2">
 
@@ -148,14 +152,14 @@ const AllQuiz = () => {
 
                 {quizes?.totalQuizes < 1 && !fetchLoading && (
                   <tr>
-                    <td colSpan={6}>
+                    <td colSpan={10}>
                       <RenderNoData title="No quizes found." />
                     </td>
                   </tr>
                 )}
                 {fetchLoading && (
                   <tr>
-                    <td colSpan={6}>
+                    <td colSpan={10}>
                       <div className="py-8 text-center font-semibold">Loading please wait....</div>
                     </td>
                   </tr>

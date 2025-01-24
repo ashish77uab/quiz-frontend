@@ -16,6 +16,8 @@ const initialState = {
   rightMark: '',
   negativeMark: '',
   time: '',
+  amount: '',
+  isPaid: false
 };
 const CreateAndUpdateQuiz = ({ isOpen, quiz, closeModal, fetchData }) => {
   const [loading, setLoading] = useState(false)
@@ -23,7 +25,8 @@ const CreateAndUpdateQuiz = ({ isOpen, quiz, closeModal, fetchData }) => {
   const handleSubmit = async (values, actionForm) => {
     setLoading(true)
     try {
-      const res = quiz ? await updateQuiz({ ...values }, quiz?._id) : await createQuiz({ ...values });
+      const formValue = { ...values }
+      const res = quiz ? await updateQuiz(formValue, quiz?._id) : await createQuiz(formValue);
       const { status, data } = res;
       if (status >= 200 && status < 300) {
         toast.success(<ToastMsg title={quiz ? `Updated Successfully` : `Created Successfully`} />);
@@ -48,6 +51,8 @@ const CreateAndUpdateQuiz = ({ isOpen, quiz, closeModal, fetchData }) => {
       rightMark: quiz?.rightMark,
       negativeMark: quiz?.negativeMark,
       time: quiz?.time,
+      isPaid: quiz?.isPaid,
+      amount: quiz?.amount,
     })
   }, [quiz])
 
@@ -92,9 +97,13 @@ const CreateAndUpdateQuiz = ({ isOpen, quiz, closeModal, fetchData }) => {
                 >
                   {({
                     values,
+                    errors,
                     handleChange,
                     handleBlur,
+                    setFieldValue,
+                    setFieldTouched
                   }) => {
+                    console.log(errors, 'errors')
                     return (
                       <Form className="w-full space-y-4 mt-4">
                         <TextInput
@@ -144,6 +153,33 @@ const CreateAndUpdateQuiz = ({ isOpen, quiz, closeModal, fetchData }) => {
                           onBlur={handleBlur}
                           value={values.time}
                         />
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="checkbox"
+                            id="isPaid"
+                            name="isPaid"
+                            checked={values?.isPaid}
+                            onChange={(e) => {
+                              setFieldValue("isPaid", e.target.checked); // Update the isPaid field
+                              if (e.target.checked) {
+                                setFieldTouched("amount", true, false); // Mark amount as touched if isPaid is true
+                              } else {
+                                setFieldValue("amount", ""); // Reset amount if isPaid is unchecked
+                              }
+                            }}
+                            className="w-5 h-5 text-primary-blue"
+                          />
+                          <label htmlFor="isPaid">Make this quiz paid</label>
+                        </div>
+                        {values?.isPaid && <TextInput
+                          type='number'
+                          label={"Price of the quiz"}
+                          placeholder="eg. 100"
+                          name="amount"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.amount}
+                        />}
 
 
                         <footer className="py-4  font-medium">

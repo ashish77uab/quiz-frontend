@@ -4,8 +4,6 @@ import { toast } from 'react-toastify';
 import ToastMsg from '../../components/toast/ToastMsg';
 import { Link } from 'react-router-dom';
 import InfiniteScrollComponent from '../../components/InfiniteScrollComponent';
-import SpinnerInline from '../../components/loaders/SpinnerInline';
-
 const AttemptedQuestion = ({ quizId }) => {
     const limit = 10;
     const [attemptedResult, setAttemptedResult] = useState({});
