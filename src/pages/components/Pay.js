@@ -9,15 +9,17 @@ const Pay = ({ amount, quizId, userId }) => {
         e.preventDefault();
 
         const transactionid = "Tr-" + uuidv4().toString(36).slice(-6);
-
+        const { REACT_APP_DEV_API, REACT_APP_PROD_API } = process.env;
+        const devEnv = process.env.NODE_ENV !== "production";
+        const baseURL = `${devEnv ? REACT_APP_DEV_API : REACT_APP_PROD_API}`
         const payload = {
             merchantId: process.env.REACT_APP_MERCHANT_ID,
             merchantTransactionId: transactionid,
             merchantUserId: 'MUID-' + uuidv4().toString(36).slice(-6),
             amount: amount * 100,
-            redirectUrl: `http://localhost:5000/auth/phonepe/status?quizId=${quizId}&userId=${userId}`,
+            redirectUrl: `${baseURL}/auth/phonepe/status?quizId=${quizId}&userId=${userId}`,
             redirectMode: "POST",
-            callbackUrl: `http://localhost:5000/auth/phonepe/status?quizId=${quizId}&userId=${userId}`,
+            callbackUrl: `${baseURL}/auth/phonepe/status?quizId=${quizId}&userId=${userId}`,
             mobileNumber: '9874563210',
             paymentInstrument: {
                 type: "PAY_PAGE",
