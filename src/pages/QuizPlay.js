@@ -147,7 +147,7 @@ const QuizPlay = () => {
           </div>
         </div>
       </div>
-      <section className=" pb-28">
+      <section className=" pb-36">
         {
           quizInfoLoading || fetchLoading ? (
             <Spinner />

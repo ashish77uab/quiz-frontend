@@ -41,9 +41,9 @@ const Option = ({
     }
 
     return (
-        <button disabled={isNotLeftTime} onClick={() => handleSelectOption(num)} className={`flex w-full  disabled:opacity-40 cursor-pointer items-center bg-white gap-4 rounded-md py-5 px-4 border ${renderClassName(question)}`}>
+        <button disabled={isNotLeftTime} onClick={() => handleSelectOption(num)} className={`flex w-full  disabled:opacity-40 cursor-pointer items-start bg-white gap-4 rounded-md py-5 px-4 border ${renderClassName(question)}`}>
             <span className='font-semibold'>{answerObj[num]}.</span>
-            <span className='font-medium'>{text}</span>
+            <span className='font-medium text-left'>{text}</span>
         </button>
     )
 
@@ -163,8 +163,8 @@ const SingleQuestion = ({ question, resetState, questions, isLastQuestion, timeT
                 </div>
             </div>
 
-            <div className="absolute bottom-0 px-4 py-4 w-full bg-white shadow-card border-t-2 border-t-zinc-100">
-                <div className="flex items-center gap-2 justify-between mb-2">
+            <div className="fixed max-w-md mx-auto bottom-0 px-4 py-4 w-full bg-white z-[51] shadow-card border-t-2 border-t-zinc-100">
+                <div className="flex items-center gap-2 justify-between mb-6">
                     <button
                         disabled={currentQuestion === 0}
                         onClick={() => handleNextQuestion('prev')}

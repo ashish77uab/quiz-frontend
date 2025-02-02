@@ -67,7 +67,7 @@ const ViewQuizQuestion = () => {
                                                 <span>{index + 1}</span> <DangerouslySetHtml html={question?.question} />
                                             </div>
                                         </div>
-                                        <div className="grid grid-cols-2 gap-2 my-4">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 my-4">
                                             <div className="text-sm"> A. {question?.option1}</div>
                                             <div className="text-sm"> B. {question?.option2}</div>
                                             <div className="text-sm"> C. {question?.option3}</div>
